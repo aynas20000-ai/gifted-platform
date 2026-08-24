@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة رعاية الموهوبات | مدارسنا بصامطة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;700;900&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#5d4374; --navy-2:#432f55; --teal:#8a6aa0; --gold:#c8a85a; --gold-light:#f3ead1;
+  --bg:#fcfaf7; --card:#ffffff; --border:#e6e6e6; --text:#22303f; --muted:#7a8698;
+  --radius:14px; --shadow:0 4px 18px rgba(22,50,79,.08);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:'Tajawal','Cairo',sans-serif; background:var(--bg); color:var(--text); direction:rtl; padding-bottom:60px;}
+h1,h2,h3,h4{font-family:'Cairo',sans-serif;}
+button{font-family:inherit; cursor:pointer; border:none;}
+input,textarea,select{font-family:inherit; direction:rtl;}
+
+/* ===== Print Cliché (thead-repeat pattern) ===== */
+#printWrapTable{width:100%; border-collapse:collapse;}
+#printWrapTable>thead{display:none;}
+.cliche{display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding:10px 18px; background:#fff;}
+.cliche-right{font-weight:700; color:var(--navy); text-align:right; font-size:13px; line-height:1.6;}
+.cliche-mid{text-align:center;}
+.cliche-mid .logo{width:62px; height:30px; display:block; margin:0 auto 3px;}
+.cliche-mid .moe{font-weight:700; color:var(--teal); font-size:12px;}
+.cliche-mid .moe-en{color:var(--muted); font-size:8.5px; direction:ltr;}
+.cliche-left{text-align:left; font-size:12.5px; color:var(--navy); line-height:1.7;}
+
+/* ===== App Header ===== */
+.app-header{display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg,var(--navy),var(--navy-2)); color:#fff; padding:16px 22px; flex-wrap:wrap; gap:10px;}
+.app-header .title-wrap{display:flex; align-items:center; gap:12px;}
+.app-header .icon-box{width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,var(--gold),#e8c766); display:flex; align-items:center; justify-content:center; font-size:20px;}
+.app-header h1{font-size:17px; font-weight:900;}
+.app-header .sub{font-size:11.5px; color:#c9d6e3;}
+.pills{display:flex; gap:6px;}
+.pill{width:34px; height:34px; border-radius:10px; background:rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; transition:.2s;}
+.pill:hover{background:rgba(255,255,255,.25);}
+
+/* ===== Tabs ===== */
+.tabs{display:flex; flex-wrap:wrap; gap:6px; padding:12px 18px; background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10;}
+.tab-btn{padding:8px 14px; border-radius:20px; background:#f0f3f7; color:var(--navy); font-size:12.5px; font-weight:700; white-space:nowrap;}
+.tab-btn.active{background:var(--navy); color:#fff;}
+.wrap{max-width:1180px; margin:0 auto; padding:18px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ===== Cards ===== */
+.card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:18px;}
+.card h2{font-size:16px; color:var(--navy); border-bottom:2px solid var(--gold-light); padding-bottom:10px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; gap:8px;}
+.card h2 .sec-icons{display:flex; gap:6px;}
+.sec-icons button{width:30px; height:30px; border-radius:8px; background:#f0f3f7; font-size:14px;}
+.sec-icons button:hover{background:var(--gold-light);}
+.card h3{font-size:13.5px; color:var(--teal); margin:14px 0 8px;}
+
+/* ===== Grid / fields ===== */
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px;}
+.field{display:flex; flex-direction:column; gap:4px;}
+.field label{font-size:12px; color:var(--muted); font-weight:700;}
+.field input, .field select, .field textarea{border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:13px; background:#fbfcfe;}
+.field textarea{resize:vertical; min-height:38px;}
+.field input:focus, .field textarea:focus, .field select:focus{outline:2px solid var(--gold-light); border-color:var(--gold);}
+
+/* ===== Tables ===== */
+table.data-table{width:100%; border-collapse:collapse; font-size:12.5px;}
+table.data-table th{background:var(--navy); color:#fff; padding:8px 6px; font-size:12px;}
+table.data-table td{border:1px solid var(--border); padding:5px; vertical-align:top;}
+table.data-table td textarea, table.data-table td input{width:100%; border:none; background:transparent; font-size:12.5px; resize:vertical; min-height:30px;}
+table.data-table td textarea:focus, table.data-table td input:focus{background:#fffdf3;}
+table.data-table tr:nth-child(even){background:#fafbfd;}
+.row-actions{display:flex; justify-content:center;}
+.btn{display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:9px; font-size:12.5px; font-weight:700;}
+.btn-add{background:var(--teal); color:#fff;}
+.btn-add:hover{background:#0c655e;}
+.btn-del{background:#fbeaea; color:#b23b3b; padding:5px 9px; border-radius:7px; font-size:12px;}
+.btn-del:hover{background:#f5d3d3;}
+.table-scroll{overflow-x:auto;}
+.toolbar{display:flex; justify-content:flex-start; margin-bottom:10px;}
+
+/* ===== Reference (roles) ===== */
+.ref-block{background:#fbfcfe; border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:12px;}
+.ref-block h4{font-size:13px; color:var(--navy); margin-bottom:8px;}
+.ref-block ul{padding-inline-start:20px; font-size:12.5px; line-height:2;}
+
+/* ===== Minutes / Report cards ===== */
+.entry-card{border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px; background:#fbfcfe; position:relative;}
+.entry-card .entry-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+.entry-card .entry-head b{color:var(--navy); font-size:13.5px;}
+.sign-row{display:flex; gap:20px; flex-wrap:wrap; margin-top:12px; border-top:1px dashed var(--border); padding-top:10px;}
+.sign-row .field{flex:1; min-width:160px;}
+
+/* ===== Signature line print ===== */
+.signbox{border:1px dashed var(--border); border-radius:8px; padding:10px; text-align:center; font-size:12px; color:var(--muted);}
+
+/* ===== E-signature widget ===== */
+.sig-widget{display:flex; flex-direction:column; align-items:center; gap:4px; margin-top:4px;}
+.sig-widget .sig-img{max-height:46px; max-width:150px; object-fit:contain;}
+.btn-sig, .btn-sig-edit{background:#f0f3f7; color:var(--navy); font-size:11.5px; padding:6px 10px; border-radius:8px; font-weight:700;}
+.btn-sig:hover, .btn-sig-edit:hover{background:var(--gold-light);}
+.sig-placeholder-line{width:110px; border-bottom:1px dashed var(--border); height:1px; margin-top:2px;}
+
+/* ===== Signature Modal ===== */
+.sig-modal-backdrop{display:none; position:fixed; inset:0; background:rgba(15,25,40,.55); z-index:200; align-items:center; justify-content:center; padding:16px;}
+.sig-modal-backdrop.open{display:flex;}
+.sig-modal{background:#fff; border-radius:16px; width:100%; max-width:460px; padding:20px; box-shadow:0 10px 40px rgba(0,0,0,.3);}
+.sig-modal h3{color:var(--navy); font-size:15px; margin-bottom:12px;}
+.sig-tabs{display:flex; gap:8px; margin-bottom:12px;}
+.sig-tab-btn{flex:1; padding:8px; border-radius:8px; background:#f0f3f7; font-size:12.5px; font-weight:700; color:var(--navy);}
+.sig-tab-btn.active{background:var(--navy); color:#fff;}
+.sig-pane{display:none;}
+.sig-pane.active{display:block;}
+#sigCanvas{width:100%; height:160px; border:1.5px dashed var(--border); border-radius:10px; background:#fbfcfe; touch-action:none;}
+#sigTypeInput{width:100%; border:1px solid var(--border); border-radius:8px; padding:9px 10px; font-size:14px; margin-bottom:10px;}
+#sigTypePreview{width:100%; height:110px; border:1.5px dashed var(--border); border-radius:10px; background:#fbfcfe;}
+.sig-modal-actions{display:flex; gap:8px; margin-top:14px;}
+.sig-modal-actions button{flex:1; padding:10px; border-radius:9px; font-size:13px; font-weight:700;}
+.sig-btn-clear{background:#f0f3f7; color:var(--navy);}
+.sig-btn-cancel{background:#fbeaea; color:#b23b3b;}
+.sig-btn-save{background:var(--teal); color:#fff;}
+
+/* ===== Settings ===== */
+.settings-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.cliche-preview{border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+.logo-edit-wrap{position:relative; width:62px; height:30px; margin:0 auto;}
+.logo-edit-btn{position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:20px; height:20px; border-radius:50%; background:var(--gold); color:#fff; font-size:10px; display:flex; align-items:center; justify-content:center;}
+
+/* ===== Footer credit (hidden in print) ===== */
+.credit-footer{text-align:center; padding:16px; font-size:11.5px; color:var(--muted);}
+.credit-footer a{color:var(--teal); text-decoration:none; font-weight:700;}
+
+/* ===== Print ===== */
+@media print{
+  .no-print, .tabs, .app-header, .credit-footer{display:none !important;}
+  #printWrapTable>thead{display:table-header-group !important;}
+  .tab-panel{display:block !important; break-before:page;}
+  .tab-panel:first-of-type{break-before:auto;}
+  body{padding:0; background:#fff;}
+  .card{box-shadow:none; border:1px solid #ddd; break-inside:avoid; page-break-inside:avoid;}
+  .field, .grid, .signbox, .entry-card, tr, .ref-block, .sig-widget{break-inside:avoid; page-break-inside:avoid;}
+  table.data-table{break-inside:auto; page-break-inside:auto;} /* table itself must be free to split — only its rows avoid */
+  h2,h3,label{break-after:avoid;}
+  .page-break{break-after:page; page-break-after:always;}
+  table.data-table{width:100% !important; table-layout:fixed;}
+  table.data-table thead{display:table-header-group;}
+  table.data-table td, table.data-table th{word-break:break-word; padding:4px;}
+  .table-scroll{overflow:visible !important;}
+  textarea{display:none !important;}
+  .print-mirror{display:block !important; white-space:pre-wrap; word-break:break-word; font-size:11.5px; padding:4px 2px; min-height:16px;}
+  input{border:none !important; background:transparent !important;}
+  .sec-icons{display:none !important;}
+}
+*{-webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important;}
+.print-mirror{display:none;}
+body[data-print-orient="portrait"] table.data-table td, body[data-print-orient="portrait"] table.data-table th{font-size:10.5px; padding:3px;}
+body[data-print-orient="landscape"] table.data-table td, body[data-print-orient="landscape"] table.data-table th{font-size:12px; padding:5px;}
+
+/* ===== School Home Dashboard ===== */
+.home-hero{background:linear-gradient(135deg,#f8f1fb,#fffaf2);border:1px solid #e8d8ef;border-radius:24px;padding:34px 26px;margin-bottom:20px;box-shadow:0 10px 30px rgba(93,67,116,.10);text-align:center;position:relative;overflow:hidden;}
+.home-hero:before,.home-hero:after{content:"";position:absolute;border-radius:50%;background:rgba(200,168,90,.12);}
+.home-hero:before{width:180px;height:180px;top:-80px;right:-50px}.home-hero:after{width:140px;height:140px;bottom:-70px;left:-35px}
+.home-badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #dbc7e8;color:#5d4374;border-radius:999px;padding:7px 14px;font-weight:700;font-size:12px;margin-bottom:13px;}
+.home-hero h2{font-size:27px;color:#5d4374;margin-bottom:9px;line-height:1.6}.home-hero .school-name{font-size:15px;font-weight:700;color:#7a658b;line-height:1.9;max-width:850px;margin:auto}.home-hero .year{display:inline-block;margin-top:12px;color:#9b7b2f;font-weight:700;font-size:13px}
+.home-people{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 22px}.person-card{background:#fffdf9;border:1px solid #eadfbf;border-radius:16px;padding:14px;text-align:center}.person-card .role{font-size:11px;color:#9a8250;margin-bottom:4px;font-weight:700}.person-card .name{font-size:14px;color:#5d4374;font-weight:900}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:14px}.home-tile{background:#fff;border:1px solid #eadff0;border-radius:18px;padding:20px 16px;text-align:center;cursor:pointer;transition:.2s;box-shadow:0 5px 16px rgba(93,67,116,.06)}.home-tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(93,67,116,.12);border-color:#d3b9df}.home-tile .ico{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#eadcf3,#fff4de);display:flex;align-items:center;justify-content:center;margin:0 auto 11px;font-size:25px}.home-tile b{display:block;color:#5d4374;font-size:14px;margin-bottom:5px}.home-tile span{font-size:11.5px;color:#8b8291;line-height:1.6}.home-note{margin-top:18px;text-align:center;color:#8d789c;font-size:12px}.home-note strong{color:#b08b38}
+@media(max-width:650px){.home-hero{padding:26px 15px}.home-hero h2{font-size:21px}.home-people{grid-template-columns:1fr}.home-grid{grid-template-columns:1fr 1fr}.home-tile{padding:16px 10px}}
+@media(max-width:420px){.home-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+
+<table id="printWrapTable">
+<thead><tr><td>
+  <div class="cliche" id="clicheMount"></div>
+</td></tr></thead>
+<tbody><tr><td>
+
+<header class="app-header no-print">
+  <div class="title-wrap">
+    <div class="icon-box">🗂️</div>
+    <div>
+      <h1>منصة رعاية الموهوبات بمدارسنا</h1>
+      <div class="sub">المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة</div>
+    </div>
+  </div>
+  <div class="pills">
+    <div class="pill" title="حفظ تلقائي">💾</div>
+    <div class="pill" title="طباعة" onclick="printNow()">🖨️</div>
+    <div class="pill" title="نسخ احتياطي" onclick="switchTab('settings')">📦</div>
+  </div>
+</header>
+
+<nav class="tabs no-print" id="tabsNav"></nav>
+
+<div class="wrap">
+
+
+  <!-- ===== الرئيسية ===== -->
+  <section class="tab-panel" id="tab-home">
+    <div class="home-hero">
+      <div class="home-badge">✨ منصة رعاية الموهوبات</div>
+      <h2>مرحبًا بكم في منصة الموهوبات المدرسية</h2>
+      <div class="school-name">المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة</div>
+      <div class="year">العام الدراسي 1448هـ</div>
+    </div>
+    <div class="home-people">
+      <div class="person-card"><div class="role">مديرة المدرسة</div><div class="name">عائشة يحيى نايف حمدي</div></div>
+      <div class="person-card"><div class="role">منسقتا الموهوبات</div><div class="name">نبيهة مذكور / إيناس مدخلي</div></div>
+    </div>
+    <div class="home-grid">
+      <div class="home-tile" onclick="switchTab('basic')"><div class="ico">🏫</div><b>بيانات المدرسة</b><span>البيانات الأساسية والإدارية للمدرسة والمنسقات</span></div>
+      <div class="home-tile" onclick="switchTab('committee')"><div class="ico">👥</div><b>لجنة رعاية الموهوبات</b><span>أعضاء اللجنة وأدوارهم وملفات العمل</span></div>
+      <div class="home-tile" onclick="switchTab('minutes')"><div class="ico">📝</div><b>المحاضر</b><span>اجتماعات اللجنة والقرارات والتوصيات والتوقيعات</span></div>
+      <div class="home-tile" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>الخطة الإجرائية</b><span>البرامج والأهداف والتنفيذ والمتابعة والشواهد</span></div>
+      <div class="home-tile" onclick="switchTab('reports')"><div class="ico">📊</div><b>تقارير البرامج</b><span>توثيق الفعاليات والبرامج والنتائج والمقترحات</span></div>
+      <div class="home-tile" onclick="switchTab('courses')"><div class="ico">🎓</div><b>الدورات التدريبية</b><span>تسجيل البرامج والدورات والجهات المنفذة</span></div>
+      <div class="home-tile" onclick="switchTab('letters')"><div class="ico">✉️</div><b>المراسلات</b><span>فهرسة الخطابات الواردة والصادرة</span></div>
+      <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مرجع مختصر لمهام فريق رعاية الموهوبات</span></div>
+      <div class="home-tile" onclick="switchTab('diff')"><div class="ico">💡</div><b>الصعوبات والتحسين</b><span>رصد التحديات والمقترحات التطويرية</span></div>
+      <div class="home-tile" onclick="switchTab('settings')"><div class="ico">⚙️</div><b>الإعدادات والطباعة</b><span>الترويسة والشعار والنسخ الاحتياطي وإعدادات الطباعة</span></div>
+    </div>
+    <div class="home-note">نحو بيئة مدرسية تُنمّي الموهبة وتصنع <strong>فرصًا أجمل وإنجازات أكبر</strong> ✨</div>
+  </section>
+
+  <!-- ===== بيانات أساسية ===== -->
+  <section class="tab-panel" id="tab-basic">
+    <div class="card">
+      <h2>البيانات الأساسية
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <h3>بيانات المدرسة</h3>
+      <div class="grid" id="grid-school"></div>
+      <h3>بيانات مديرة المدرسة</h3>
+      <div class="grid" id="grid-principal"></div>
+      <h3>بيانات وكيلة المدرسة</h3>
+      <div class="grid" id="grid-deputy"></div>
+      <h3>بيانات منسقة الموهوبات</h3>
+      <div class="grid" id="grid-coord"></div>
+    </div>
+  </section>
+
+  <!-- ===== الأدوار والمهام الإدارية ===== -->
+  <section class="tab-panel" id="tab-roles">
+    <div class="card">
+      <h2>الأدوار والمهام الإدارية تجاه برنامج الموهوبات
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button></span>
+      </h2>
+      <div id="rolesRef"></div>
+    </div>
+  </section>
+
+  <!-- ===== اللجنة ===== -->
+  <section class="tab-panel" id="tab-committee">
+    <div class="card">
+      <h2>لجنة رعاية الموهوبات
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <h3>أعضاء اللجنة</h3>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.committee.add()">➕ إضافة عضو/ة</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:6%"><col style="width:26%"><col style="width:20%"><col><col style="width:8%"></colgroup><thead><tr><th>م</th><th>الوظيفة</th><th>دورها في اللجنة</th><th>الاسم</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-committee"></tbody></table></div>
+      <h3>سجلات وملفات اللجنة</h3>
+      <div class="ref-block">
+        <ul>
+          <li>ملف التوعية: بيانات المدرسة ومنسقة الموهوبات وبيانات الطالبات الموهوبات، ومساهمات المدرسة في الأنشطة والزيارات والندوات.</li>
+          <li>ملف الخطابات: الوارد (تعاميم إدارة الموهوبات) والصادر (خطابات وتقارير وخطط المدرسة).</li>
+          <li>ملف الطالبة الموهوب/ة: يعبأ إلكترونياً وتُحفظ نسخة ورقية لمتابعة مستجداته.</li>
+          <li>ملف البرامج: مساهمات المدرسة في الأنشطة والمشاركات والزيارات والندوات مع الشواهد.</li>
+          <li>ملف التقارير: تقرير مفصل لكل نشاط، وتقارير ختامية لكل فصل دراسي مع الشواهد.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== المحاضر ===== -->
+  <section class="tab-panel" id="tab-minutes">
+    <div class="card">
+      <h2>محاضر اجتماعات اللجنة
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="addMinute()">➕ إضافة محضر اجتماع جديد</button></div>
+      <div id="minutesList"></div>
+    </div>
+  </section>
+
+  <!-- ===== الخطة الإجرائية ===== -->
+  <section class="tab-panel" id="tab-plan">
+    <div class="card">
+      <h2>الخطة الإجرائية / خطة التوعية
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.plan.add()">➕ إضافة بند</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:4%"><col style="width:18%"><col style="width:20%"><col style="width:9%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>عنوان البند</th><th>ما تم إنجازه</th><th>تاريخ التنفيذ</th><th>الفئة المنفذة</th><th>الفئة المستهدفة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-plan"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== الصعوبات ===== -->
+  <section class="tab-panel" id="tab-diff">
+    <div class="card">
+      <h2>الصعوبات التي تواجه منسقة الموهوبات
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.diff.add()">➕ إضافة صعوبة</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:6%"><col style="width:32%"><col style="width:32%"><col style="width:24%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>الصعوبات</th><th>المقترحات للتحسين</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-diff"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== الدورات التدريبية ===== -->
+  <section class="tab-panel" id="tab-courses">
+    <div class="card">
+      <h2>الدورات التدريبية
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.courses.add()">➕ إضافة دورة</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:6%"><col style="width:50%"><col style="width:19%"><col style="width:19%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>مسمى الدورة</th><th>مدتها</th><th>جهتها</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-courses"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== المراسلات ===== -->
+  <section class="tab-panel" id="tab-letters">
+    <div class="card">
+      <h2>فهرسة الخطابات الصادرة
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.lettersOut.add()">➕ إضافة خطاب صادر</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:5%"><col style="width:27%"><col style="width:12%"><col style="width:12%"><col style="width:20%"><col style="width:18%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>عنوان الخطاب</th><th>رقم الخطاب</th><th>تاريخ الخطاب</th><th>الجهة الصادر إليها</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-lettersOut"></tbody></table></div>
+    </div>
+    <div class="card">
+      <h2>فهرسة الخطابات الواردة
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.lettersIn.add()">➕ إضافة خطاب وارد</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:5%"><col style="width:27%"><col style="width:12%"><col style="width:12%"><col style="width:20%"><col style="width:18%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>عنوان الخطاب</th><th>رقم الخطاب</th><th>تاريخ الخطاب</th><th>الجهة الوارد منها</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-lettersIn"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== تقارير الفعاليات ===== -->
+  <section class="tab-panel" id="tab-reports">
+    <div class="card">
+      <h2>تقارير الفعاليات والبرامج المنفذة
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="addReport()">➕ إضافة تقرير فعالية</button></div>
+      <div id="reportsList"></div>
+    </div>
+  </section>
+
+  <!-- ===== الإعدادات ===== -->
+  <section class="tab-panel no-print" id="tab-settings">
+    <div class="card">
+      <h2>ترويسة الطباعة (الكليشة)</h2>
+      <div class="settings-grid">
+        <div>
+          <div class="grid">
+            <div class="field"><label>إدارة تعليم منطقة</label><input id="s_region" oninput="onSettingsInput()"></div>
+            <div class="field"><label>مكتب التعليم</label><input id="s_office" oninput="onSettingsInput()"></div>
+            <div class="field"><label>اسم المدرسة</label><input id="s_schoolName" oninput="onSettingsInput()"></div>
+            <div class="field"><label>العام الدراسي</label><input id="s_year" placeholder="مثال: 1448هـ" oninput="onSettingsInput()"></div>
+            <div class="field"><label>اتجاه الطباعة</label>
+              <select id="s_orient" onchange="onSettingsInput()">
+                <option value="portrait">عمودي</option>
+                <option value="landscape">أفقي</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:14px;">
+            <div class="field"><label>شعار الكليشة</label></div>
+            <div class="logo-edit-wrap">
+              <img id="logoPreviewImg" class="logo" style="width:62px;height:30px;object-fit:contain;" />
+              <button class="logo-edit-btn" onclick="document.getElementById('logoFileInput').click()">✏️</button>
+            </div>
+            <input type="file" id="logoFileInput" accept="image/*" style="display:none" onchange="onLogoUpload(event)">
+            <div style="text-align:center; margin-top:6px;">
+              <button class="btn-del" id="removeLogoBtn" style="display:none" onclick="removeLogo()">🗑️ إزالة الشعار</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="field"><label>معاينة حية</label></div>
+          <div class="cliche-preview" id="clichePreviewMount"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>النسخ الاحتياطي</h2>
+      <div class="grid">
+        <button class="btn btn-add" onclick="exportBackup()">⬇️ تنزيل نسخة احتياطية (JSON)</button>
+        <div class="field"><label>استعادة نسخة احتياطية</label><input type="file" accept=".json" onchange="importBackup(event)"></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="credit-footer no-print">
+  منصة رعاية الموهوبات — المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة
+</div>
+
+</td></tr></tbody>
+</table>
+
+<!-- ===== Signature Modal ===== -->
+<div class="sig-modal-backdrop no-print" id="sigModalBackdrop">
+  <div class="sig-modal">
+    <h3>✒️ التوقيع الإلكتروني</h3>
+    <div class="sig-tabs">
+      <button class="sig-tab-btn active" id="sigTabDrawBtn" onclick="switchSigTab('draw')">🖊️ رسم التوقيع</button>
+      <button class="sig-tab-btn" id="sigTabTypeBtn" onclick="switchSigTab('type')">🔤 كتابة الاسم</button>
+    </div>
+    <div class="sig-pane active" id="sigPaneDraw">
+      <canvas id="sigCanvas" width="420" height="160"></canvas>
+      <div class="sig-modal-actions"><button class="sig-btn-clear" onclick="clearSigCanvas()">مسح</button></div>
+    </div>
+    <div class="sig-pane" id="sigPaneType">
+      <input id="sigTypeInput" placeholder="اكتب الاسم هنا" oninput="renderTypedSigPreview()">
+      <canvas id="sigTypePreview" width="420" height="110"></canvas>
+    </div>
+    <div class="sig-modal-actions">
+      <button class="sig-btn-cancel" onclick="closeSigModal()">إلغاء</button>
+      <button class="sig-btn-save" onclick="saveSignature()">حفظ التوقيع</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================== State ===================== */
+const DATA_KEY = 'giftedSchoolSamtaData_v1';
+const SETTINGS_KEY = 'giftedSchoolSamtaSettings_v1';
+
+const defaultSettings = { region:'جازان', office:'صامطة', schoolName:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة', year:'1448هـ', orient:'portrait', logo:null };
+const defaultData = {
+  school:{name:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة',stage:'ابتدائية ومتوسطة وتربية فكرية',classCount:'',studentCount:'',buildingType:'حكومي',phone:'',email:''},
+  principal:{name:'عائشة يحيى نايف حمدي',mobile:'',qualification:''},
+  deputy:{name:'',mobile:'',qualification:''},
+  coord:{name:'نبيهة مذكور / إيناس مدخلي',mobile:'',qualification:'',lessons:'',otherWork:'',serviceYears:'',giftedYears:'',email:''},
+  committee:[
+    {role:'رئيسة اللجنة',job:'مديرة المدرسة',name:'عائشة يحيى نايف حمدي'},
+    {role:'نائبة الرئيس',job:'منسقتا الموهوبات',name:'نبيهة مذكور / إيناس مدخلي'},
+    {role:'عضو/ة',job:'وكيل/ة الشؤون التعليمية',name:''},
+    {role:'عضو/ة',job:'الموجه/المرشد الطلابي',name:''},
+    {role:'عضو/ة',job:'رائدة النشاط',name:''}
+  ],
+  minutes:[],
+  plan:[
+    {item:'تدريس مهارات التفكير للصف الثالث الابتدائي', detail:'حصة أسبوعياً لكل فصل، مدرجة في جدول الحصص', date:'', exec:'', target:'', notes:''},
+    {item:'إنشاء قاعدة بيانات للطلاب/الطالبات المجتازين مقياس موهبة', detail:'', date:'', exec:'', target:'', notes:''},
+    {item:'التعريف بالموهوبات وآلية التعامل معهم', detail:'عبر الإذاعة الصباحية وورش العمل والنشرات والمسابقات', date:'', exec:'', target:'', notes:''},
+    {item:'إعداد خطة سنوية لمنسقة الموهوبات', detail:'', date:'', exec:'', target:'', notes:''},
+    {item:'التعريف بالأولمبياد الوطني للإبداع العلمي', detail:'تسجيل ومتابعة الطالبات، تنفيذ ورش عمل، ترشيح لحضور ورش الأولمبياد', date:'', exec:'', target:'', notes:''},
+    {item:'التعريف بالبرنامج الوطني لمقياس موهبة', detail:'إعلانات، إذاعة، ورش عمل، رسائل لأولياء الأمور، نشرات توعوية، ترشيح واختيار الطلاب المرشحين', date:'', exec:'', target:'', notes:''},
+    {item:'تفعيل أسبوع موهبة (3 مارس من كل عام)', detail:'لمدة أسبوع كامل بمشاركة الطلاب والمعلمين والإداريين وأولياء الأمور، ورفع تقرير إلكتروني بنهايته', date:'', exec:'', target:'', notes:''},
+    {item:'التسريع للمراحل (إن وُجد)', detail:'بناءً على الأسماء المرسلة من مشرف/ة الموهوبات للمدرسة', date:'', exec:'', target:'', notes:''},
+    {item:'رفع التقرير الختامي بالأعمال المنفذة', detail:'مع رفع الشواهد نهاية كل عام', date:'', exec:'', target:'', notes:''}
+  ],
+  diff:[], courses:[], lettersOut:[], lettersIn:[], reports:[]
+};
+
+let settings = load(SETTINGS_KEY, defaultSettings);
+let data = load(DATA_KEY, defaultData);
+
+function load(key, def){
+  try{ const v = localStorage.getItem(key); return v ? Object.assign({}, def, JSON.parse(v)) : JSON.parse(JSON.stringify(def)); }
+  catch(e){ return JSON.parse(JSON.stringify(def)); }
+}
+function saveSettings(){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); renderCliche(); }
+function saveData(){ localStorage.setItem(DATA_KEY, JSON.stringify(data)); }
+
+/* ===================== Cliché ===================== */
+const defaultLogoSVG = `<svg class="logo" viewBox="0 0 62 30" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16324f"/><stop offset="1" stop-color="#0f7a72"/></linearGradient></defs><g fill="url(#g1)">
+<circle cx="6" cy="6" r="2.4"/><circle cx="16" cy="6" r="2.4"/><circle cx="26" cy="6" r="2.4"/><circle cx="36" cy="6" r="2.4"/><circle cx="46" cy="6" r="2.4"/><circle cx="56" cy="6" r="2.4"/>
+<circle cx="11" cy="15" r="2.4"/><circle cx="21" cy="15" r="2.4"/><circle cx="31" cy="15" r="2.4"/><circle cx="41" cy="15" r="2.4"/><circle cx="51" cy="15" r="2.4"/>
+<circle cx="6" cy="24" r="2.4"/><circle cx="16" cy="24" r="2.4"/><circle cx="26" cy="24" r="2.4"/><circle cx="36" cy="24" r="2.4"/><circle cx="46" cy="24" r="2.4"/><circle cx="56" cy="24" r="2.4"/>
+</g></svg>`;
+
+function buildClicheHTML(){
+  const region = settings.region ? settings.region : '.......';
+  const office = settings.office ? settings.office : '';
+  const school = settings.schoolName ? settings.schoolName : '.......';
+  const year = settings.year ? settings.year : '.......';
+  const logoHTML = settings.logo
+    ? `<img class="logo" src="${settings.logo}" style="object-fit:contain;">`
+    : defaultLogoSVG;
+  return `
+    <div class="cliche-right">المملكة العربية السعودية<br>وزارة التعليم</div>
+    <div class="cliche-mid">${logoHTML}<div class="moe">وزارة التعليم</div><div class="moe-en">Ministry of Education</div></div>
+    <div class="cliche-left">الإدارة العامة للتعليم بمنطقة ${region}${office ? ' — مكتب تعليم '+office : ''}<br>${school}<br>العام الدراسي: ${year}</div>
+  `;
+}
+function renderCliche(){
+  document.getElementById('clicheMount').innerHTML = buildClicheHTML();
+  document.getElementById('clichePreviewMount').innerHTML = buildClicheHTML();
+  document.getElementById('logoPreviewImg').src = settings.logo || '';
+  document.getElementById('removeLogoBtn').style.display = settings.logo ? 'inline-flex' : 'none';
+  injectOrientation();
+}
+function onSettingsInput(){
+  settings.region = document.getElementById('s_region').value;
+  settings.office = document.getElementById('s_office').value;
+  settings.schoolName = document.getElementById('s_schoolName').value;
+  settings.year = document.getElementById('s_year').value;
+  settings.orient = document.getElementById('s_orient').value;
+  saveSettings();
+}
+function onLogoUpload(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{ settings.logo = reader.result; saveSettings(); };
+  reader.readAsDataURL(file);
+}
+function removeLogo(){ settings.logo = null; saveSettings(); }
+
+function injectOrientation(){
+  let styleTag = document.getElementById('printOrientStyle');
+  if(!styleTag){ styleTag = document.createElement('style'); styleTag.id='printOrientStyle'; document.head.appendChild(styleTag); }
+  const size = settings.orient === 'landscape' ? 'landscape' : 'portrait';
+  document.body.setAttribute('data-print-orient', size);
+  styleTag.textContent = `@page{ size:A4 ${size}; margin:0 1.5cm; } body{padding-top:1.6cm; padding-bottom:0.6cm;}`;
+}
+
+/* ===================== Generic table manager ===================== */
+function makeTable(key, tbodyId, columns, seq){
+  return {
+    render(){
+      const tbody = document.getElementById(tbodyId);
+      const rows = data[key];
+      tbody.innerHTML = rows.map((row,i)=>{
+        const cells = columns.map(col=>{
+          if(col.static) return `<td>${row[col.key]||''}</td>`;
+          const val = (row[col.key]||'').replace(/"/g,'&quot;');
+          if(col.type==='textarea'){
+            return `<td><textarea oninput="tables.${key}.set(${i},'${col.key}',this.value); autoGrow(this)" onload="autoGrow(this)">${row[col.key]||''}</textarea><div class="print-mirror"></div></td>`;
+          }
+          return `<td><input type="${col.type||'text'}" value="${val}" oninput="tables.${key}.set(${i},'${col.key}',this.value)"></td>`;
+        }).join('');
+        return `<tr><td>${i+1}</td>${cells}<td class="no-print row-actions"><button class="btn-del" onclick="tables.${key}.del(${i})">✕</button></td></tr>`;
+      }).join('');
+      tbody.querySelectorAll('textarea').forEach(t=>autoGrow(t));
+    },
+    add(){ const obj={}; columns.forEach(c=>obj[c.key]=''); data[key].push(obj); saveData(); this.render(); },
+    del(i){ data[key].splice(i,1); saveData(); this.render(); },
+    set(i,k,v){ data[key][i][k]=v; saveData(); }
+  };
+}
+function autoGrow(el){ if(!el) return; el.style.height='auto'; el.style.height=(el.scrollHeight)+'px'; }
+
+const tables = {
+  committee: makeTable('committee','tbody-committee',[{key:'job',label:'الوظيفة'},{key:'role',label:'دورها'},{key:'name',label:'الاسم'}]),
+  plan: makeTable('plan','tbody-plan',[{key:'item',label:'البند'},{key:'detail',type:'textarea'},{key:'date',type:'date'},{key:'exec',label:'المنفذة'},{key:'target',label:'المستهدفة'},{key:'notes',type:'textarea'}]),
+  diff: makeTable('diff','tbody-diff',[{key:'difficulty',type:'textarea'},{key:'suggestion',type:'textarea'},{key:'notes',type:'textarea'}]),
+  courses: makeTable('courses','tbody-courses',[{key:'name'},{key:'duration'},{key:'provider'}]),
+  lettersOut: makeTable('lettersOut','tbody-lettersOut',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'to'},{key:'notes',type:'textarea'}]),
+  lettersIn: makeTable('lettersIn','tbody-lettersIn',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'from'},{key:'notes',type:'textarea'}])
+};
+
+/* fix plan columns order rendering (item/detail special handling) */
+tables.plan.render = function(){
+  const tbody = document.getElementById('tbody-plan');
+  tbody.innerHTML = data.plan.map((row,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><textarea oninput="data.plan[${i}].item=this.value; saveData();">${row.item||''}</textarea><div class="print-mirror"></div></td>
+      <td><textarea oninput="data.plan[${i}].detail=this.value; saveData();">${row.detail||''}</textarea><div class="print-mirror"></div></td>
+      <td><input type="date" value="${row.date||''}" oninput="data.plan[${i}].date=this.value; saveData();"></td>
+      <td><input value="${(row.exec||'').replace(/"/g,'&quot;')}" oninput="data.plan[${i}].exec=this.value; saveData();"></td>
+      <td><input value="${(row.target||'').replace(/"/g,'&quot;')}" oninput="data.plan[${i}].target=this.value; saveData();"></td>
+      <td><textarea oninput="data.plan[${i}].notes=this.value; saveData();">${row.notes||''}</textarea><div class="print-mirror"></div></td>
+      <td class="no-print row-actions"><button class="btn-del" onclick="tables.plan.del(${i})">✕</button></td>
+    </tr>`).join('');
+  tbody.querySelectorAll('textarea').forEach(t=>autoGrow(t));
+};
+tables.plan.add = function(){ data.plan.push({item:'',detail:'',date:'',exec:'',target:'',notes:''}); saveData(); this.render(); };
+tables.plan.del = function(i){ data.plan.splice(i,1); saveData(); this.render(); };
+
+tables.committee.render = function(){
+  const tbody = document.getElementById('tbody-committee');
+  tbody.innerHTML = data.committee.map((row,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><input value="${(row.job||'').replace(/"/g,'&quot;')}" oninput="data.committee[${i}].job=this.value; saveData();"></td>
+      <td><input value="${(row.role||'').replace(/"/g,'&quot;')}" oninput="data.committee[${i}].role=this.value; saveData();"></td>
+      <td><input value="${(row.name||'').replace(/"/g,'&quot;')}" oninput="data.committee[${i}].name=this.value; saveData();"></td>
+      <td class="no-print row-actions"><button class="btn-del" onclick="tables.committee.del(${i})">✕</button></td>
+    </tr>`).join('');
+};
+tables.committee.add = function(){ data.committee.push({job:'',role:'عضو/ة',name:''}); saveData(); this.render(); };
+tables.committee.del = function(i){ data.committee.splice(i,1); saveData(); this.render(); };
+
+/* ===================== Minutes (repeatable cards) ===================== */
+function addMinute(){
+  data.minutes.push({num:data.minutes.length+1, day:'', date:'', topic:'', present:'', absent:'', discussion:'', decisions:[], attendees:[], headSign:{name:'',img:null}, coordSign:{name:'',img:null}});
+  saveData(); renderMinutes();
+}
+function delMinute(i){ data.minutes.splice(i,1); saveData(); renderMinutes(); }
+function renderMinutes(){
+  const el = document.getElementById('minutesList');
+  el.innerHTML = data.minutes.map((m,i)=>`
+    <div class="entry-card">
+      <div class="entry-head"><b>محضر اجتماع رقم (${i+1})</b><button class="btn-del no-print" onclick="delMinute(${i})">✕ حذف المحضر</button></div>
+      <div class="grid">
+        <div class="field"><label>اليوم</label><input value="${(m.day||'').replace(/"/g,'&quot;')}" oninput="data.minutes[${i}].day=this.value; saveData();"></div>
+        <div class="field"><label>التاريخ</label><input type="date" value="${m.date||''}" oninput="data.minutes[${i}].date=this.value; saveData();"></div>
+        <div class="field"><label>عدد الحاضرين/الحاضرات</label><input value="${(m.present||'').replace(/"/g,'&quot;')}" oninput="data.minutes[${i}].present=this.value; saveData();"></div>
+        <div class="field"><label>عدد الغائبين/الغائبات</label><input value="${(m.absent||'').replace(/"/g,'&quot;')}" oninput="data.minutes[${i}].absent=this.value; saveData();"></div>
+      </div>
+      <div class="field" style="margin-top:10px;"><label>موضوع الاجتماع / أهم النقاط المطروحة</label><textarea oninput="data.minutes[${i}].discussion=this.value; saveData(); autoGrow(this)">${m.discussion||''}</textarea><div class="print-mirror"></div></div>
+      <h3>القرارات والتوصيات</h3>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="addDecision(${i})">➕ إضافة قرار</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:8%"><col style="width:46%"><col style="width:40%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>القرار</th><th>آلية التنفيذ</th><th class="no-print">حذف</th></tr></thead><tbody>
+        ${(m.decisions||[]).map((d,j)=>`<tr><td>${j+1}</td>
+          <td><textarea oninput="data.minutes[${i}].decisions[${j}].text=this.value; saveData();">${d.text||''}</textarea><div class="print-mirror"></div></td>
+          <td><textarea oninput="data.minutes[${i}].decisions[${j}].mech=this.value; saveData();">${d.mech||''}</textarea><div class="print-mirror"></div></td>
+          <td class="no-print row-actions"><button class="btn-del" onclick="delDecision(${i},${j})">✕</button></td></tr>`).join('')}
+      </tbody></table></div>
+      <h3>أسماء الحاضرين/الحاضرات وتوقيعاتهم</h3>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="addAttendee(${i})">➕ إضافة اسم</button></div>
+      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:8%"><col style="width:46%"><col style="width:40%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>الاسم</th><th>التوقيع</th><th class="no-print">حذف</th></tr></thead><tbody>
+        ${(m.attendees||[]).map((a,j)=>{ const uid='att-'+i+'-'+j; sigTargets[uid]={obj:a,key:'sigImg',refresh:renderMinutes}; return `<tr><td>${j+1}</td>
+          <td><input value="${(a.name||'').replace(/"/g,'&quot;')}" oninput="data.minutes[${i}].attendees[${j}].name=this.value; saveData();"></td>
+          <td>${sigWidgetHTML(a.sigImg,uid)}</td>
+          <td class="no-print row-actions"><button class="btn-del" onclick="delAttendee(${i},${j})">✕</button></td></tr>`; }).join('')}
+      </tbody></table></div>
+      <div class="sign-row">
+        <div class="field"><label>رئيسة اللجنة</label><input value="${(m.headSign.name||'').replace(/"/g,'&quot;')}" oninput="data.minutes[${i}].headSign.name=this.value; saveData();" placeholder="الاسم">${(()=>{const uid='mh-'+i; sigTargets[uid]={obj:m.headSign,key:'img',refresh:renderMinutes}; return sigWidgetHTML(m.headSign.img,uid);})()}</div>
+        <div class="field"><label>منسقة الموهوبات</label><input value="${(m.coordSign.name||'').replace(/"/g,'&quot;')}" oninput="data.minutes[${i}].coordSign.name=this.value; saveData();" placeholder="الاسم">${(()=>{const uid='mc-'+i; sigTargets[uid]={obj:m.coordSign,key:'img',refresh:renderMinutes}; return sigWidgetHTML(m.coordSign.img,uid);})()}</div>
+      </div>
+    </div>`).join('') || `<p style="color:var(--muted); font-size:13px;">لا توجد محاضر بعد — اضغط "إضافة محضر اجتماع جديد" للبدء.</p>`;
+  el.querySelectorAll('textarea').forEach(t=>autoGrow(t));
+}
+function addDecision(i){ data.minutes[i].decisions.push({text:'',mech:''}); saveData(); renderMinutes(); }
+function delDecision(i,j){ data.minutes[i].decisions.splice(j,1); saveData(); renderMinutes(); }
+function addAttendee(i){ data.minutes[i].attendees.push({name:'',sig:''}); saveData(); renderMinutes(); }
+function delAttendee(i,j){ data.minutes[i].attendees.splice(j,1); saveData(); renderMinutes(); }
+
+/* ===================== Activity Reports (repeatable cards) ===================== */
+function addReport(){
+  data.reports.push({title:'',type:'',date:'',days:'',goal:'',mech:'',attendees:'',pos:'',neg:'',sugg:'',executor:{name:'',img:null},principal:{name:'',img:null}});
+  saveData(); renderReports();
+}
+function delReport(i){ data.reports.splice(i,1); saveData(); renderReports(); }
+function renderReports(){
+  const el = document.getElementById('reportsList');
+  el.innerHTML = data.reports.map((r,i)=>`
+    <div class="entry-card">
+      <div class="entry-head"><b>تقرير فعالية رقم (${i+1})</b><button class="btn-del no-print" onclick="delReport(${i})">✕ حذف التقرير</button></div>
+      <div class="grid">
+        <div class="field"><label>عنوان الفعالية</label><input value="${(r.title||'').replace(/"/g,'&quot;')}" oninput="data.reports[${i}].title=this.value; saveData();"></div>
+        <div class="field"><label>نوع الفعالية (مسابقة/ورشة عمل...)</label><input value="${(r.type||'').replace(/"/g,'&quot;')}" oninput="data.reports[${i}].type=this.value; saveData();"></div>
+        <div class="field"><label>تاريخ التنفيذ</label><input type="date" value="${r.date||''}" oninput="data.reports[${i}].date=this.value; saveData();"></div>
+        <div class="field"><label>عدد الأيام</label><input value="${(r.days||'').replace(/"/g,'&quot;')}" oninput="data.reports[${i}].days=this.value; saveData();"></div>
+        <div class="field"><label>عدد الحاضرين/الحاضرات</label><input value="${(r.attendees||'').replace(/"/g,'&quot;')}" oninput="data.reports[${i}].attendees=this.value; saveData();"></div>
+      </div>
+      <div class="grid" style="margin-top:10px;">
+        <div class="field"><label>الهدف</label><textarea oninput="data.reports[${i}].goal=this.value; saveData(); autoGrow(this)">${r.goal||''}</textarea><div class="print-mirror"></div></div>
+        <div class="field"><label>آلية التنفيذ</label><textarea oninput="data.reports[${i}].mech=this.value; saveData(); autoGrow(this)">${r.mech||''}</textarea><div class="print-mirror"></div></div>
+        <div class="field"><label>الإيجابيات</label><textarea oninput="data.reports[${i}].pos=this.value; saveData(); autoGrow(this)">${r.pos||''}</textarea><div class="print-mirror"></div></div>
+        <div class="field"><label>السلبيات</label><textarea oninput="data.reports[${i}].neg=this.value; saveData(); autoGrow(this)">${r.neg||''}</textarea><div class="print-mirror"></div></div>
+        <div class="field"><label>المقترحات</label><textarea oninput="data.reports[${i}].sugg=this.value; saveData(); autoGrow(this)">${r.sugg||''}</textarea><div class="print-mirror"></div></div>
+      </div>
+      <div class="sign-row">
+        <div class="field"><label>اسم المنفذ/ة</label><input value="${(r.executor.name||'').replace(/"/g,'&quot;')}" oninput="data.reports[${i}].executor.name=this.value; saveData();" placeholder="الاسم">${(()=>{const uid='rex-'+i; sigTargets[uid]={obj:r.executor,key:'img',refresh:renderReports}; return sigWidgetHTML(r.executor.img,uid);})()}</div>
+        <div class="field"><label>مديرة المدرسة (الختم والتوقيع)</label><input value="${(r.principal.name||'').replace(/"/g,'&quot;')}" oninput="data.reports[${i}].principal.name=this.value; saveData();" placeholder="الاسم">${(()=>{const uid='rpr-'+i; sigTargets[uid]={obj:r.principal,key:'img',refresh:renderReports}; return sigWidgetHTML(r.principal.img,uid);})()}</div>
+      </div>
+    </div>`).join('') || `<p style="color:var(--muted); font-size:13px;">لا توجد تقارير بعد — اضغط "إضافة تقرير فعالية" للبدء.</p>`;
+  el.querySelectorAll('textarea').forEach(t=>autoGrow(t));
+}
+
+/* ===================== Basic info fields ===================== */
+function fieldHTML(obj, path, key, label, type){
+  const val = (obj[key]||'').toString().replace(/"/g,'&quot;');
+  if(type==='textarea') return `<div class="field"><label>${label}</label><textarea oninput="${path}.${key}=this.value; saveData();">${obj[key]||''}</textarea></div>`;
+  if(type==='select'){
+    return `<div class="field"><label>${label}</label><select oninput="${path}.${key}=this.value; saveData();">
+      <option value="حكومي" ${obj[key]==='حكومي'?'selected':''}>حكومي</option>
+      <option value="مستأجر" ${obj[key]==='مستأجر'?'selected':''}>مستأجر</option>
+    </select></div>`;
+  }
+  return `<div class="field"><label>${label}</label><input type="${type||'text'}" value="${val}" oninput="${path}.${key}=this.value; saveData();"></div>`;
+}
+function renderBasic(){
+  document.getElementById('grid-school').innerHTML = [
+    fieldHTML(data.school,'data.school','name','اسم المدرسة'),
+    fieldHTML(data.school,'data.school','stage','المرحلة'),
+    fieldHTML(data.school,'data.school','classCount','عدد الفصول'),
+    fieldHTML(data.school,'data.school','studentCount','عدد الطالبات/الطلاب'),
+    fieldHTML(data.school,'data.school','buildingType','نوع المبنى','select'),
+    fieldHTML(data.school,'data.school','phone','رقم هاتف المدرسة'),
+    fieldHTML(data.school,'data.school','email','البريد الإلكتروني'),
+  ].join('');
+  document.getElementById('grid-principal').innerHTML = [
+    fieldHTML(data.principal,'data.principal','name','اسم مديرة المدرسة'),
+    fieldHTML(data.principal,'data.principal','mobile','رقم الجوال'),
+    fieldHTML(data.principal,'data.principal','qualification','المؤهل / التخصص'),
+  ].join('');
+  document.getElementById('grid-deputy').innerHTML = [
+    fieldHTML(data.deputy,'data.deputy','name','اسم وكيلة المدرسة'),
+    fieldHTML(data.deputy,'data.deputy','mobile','رقم الجوال'),
+    fieldHTML(data.deputy,'data.deputy','qualification','المؤهل / التخصص'),
+  ].join('');
+  document.getElementById('grid-coord').innerHTML = [
+    fieldHTML(data.coord,'data.coord','name','اسم منسقة الموهوبات'),
+    fieldHTML(data.coord,'data.coord','mobile','رقم الجوال'),
+    fieldHTML(data.coord,'data.coord','qualification','المؤهل / التخصص'),
+    fieldHTML(data.coord,'data.coord','lessons','عدد الحصص'),
+    fieldHTML(data.coord,'data.coord','otherWork','أعمال أخرى مسندة'),
+    fieldHTML(data.coord,'data.coord','serviceYears','سنوات الخدمة في التعليم'),
+    fieldHTML(data.coord,'data.coord','giftedYears','سنوات العمل كمنسق/ة موهوبين'),
+    fieldHTML(data.coord,'data.coord','email','البريد الإلكتروني'),
+  ].join('');
+}
+
+/* ===================== Roles reference (static, gender-inclusive) ===================== */
+function renderRoles(){
+  document.getElementById('rolesRef').innerHTML = `
+    <div class="ref-block">
+      <h4>دور مديرة المدرسة في رعاية الموهوبات</h4>
+      <ul>
+        <li>الإشراف على تنمية وعي منسوبي/منسوبات المدرسة بسمات الطالبات الموهوبات واحتياجاتهم التعليمية والنفسية.</li>
+        <li>تحفيز أعضاء/عضوات مجلس المدرسة على رعاية الموهوبات لتحقيق الأهداف المنشودة.</li>
+        <li>الإشراف على خطة مجلس المدرسة في رعاية الموهوبات ومتابعة تنفيذها وتقويمها وتذليل معوقاتها.</li>
+        <li>مساندة منسقة الموهوبات في تفعيل دوره/دورها.</li>
+        <li>تشجيع المعلمات على تنويع طرق التدريس بما يخدم الموهوبات.</li>
+        <li>تهيئة البيئة المدرسية المناسبة لرعاية الطالبات الموهوبات.</li>
+      </ul>
+    </div>
+    <div class="ref-block">
+      <h4>مهام منسقة الموهوبات</h4>
+      <ul>
+        <li>تدريس مهارات التفكير للصف الثالث الابتدائي بواقع حصة أسبوعياً لكل فصل.</li>
+        <li>إنشاء قاعدة بيانات للطلاب/الطالبات المجتازين مقياس موهبة.</li>
+        <li>التعريف بالموهوبات وآلية التعامل معهم عبر الإذاعة الصباحية وورش العمل والنشرات والمسابقات.</li>
+        <li>الاطلاع على اللوائح والتعاميم المتعلقة برعاية الموهوبات ومتابعة تنفيذها.</li>
+        <li>إعداد خطة سنوية وعرضها على مجلس المدرسة بعد اعتمادها من المشرف/ة التربوي/ة.</li>
+        <li>التنسيق مع مشرف/ة الموهوبات بخصوص الاختبارات والمقاييس والترشيح لبرامج الرعاية.</li>
+        <li>التعريف بالأولمبياد الوطني للإبداع العلمي ومتابعة تسجيل الطالبات.</li>
+        <li>التعريف بالبرنامج الوطني لمقياس موهبة وتنظيم عملية الترشيح والاختيار.</li>
+        <li>تفعيل أسبوع موهبة (3 مارس من كل عام) ورفع تقرير إلكتروني بنهايته.</li>
+        <li>متابعة التسريع للمراحل المعنية بناءً على توجيهات مشرف/ة الموهوبات.</li>
+        <li>إعداد التقارير الدورية والتقرير الختامي السنوي مع رفع الشواهد.</li>
+      </ul>
+    </div>
+    <div class="ref-block">
+      <h4>دور المرشدة الطلابية في رعاية الموهوبات</h4>
+      <ul>
+        <li>توعية المعلمات بخصائص الطالبات الموهوبات وأساليب الكشف عنهم.</li>
+        <li>المساهمة مع منسقة الموهوبات في الكشف المبكر عن الموهوبات.</li>
+        <li>تقديم الرعاية النفسية والعلمية للطلاب/الطالبات المرشحين ولم يجتازوا مقاييس الكشف.</li>
+        <li>توعية أولياء الأمور بخصائص أبنائهم/بناتهم الموهوبات وكيفية التعامل معهم.</li>
+        <li>تكريم الطالبات الموهوبات ودعم إبراز إنجازاتهم.</li>
+      </ul>
+    </div>
+    <div class="ref-block">
+      <h4>دور رائدة النشاط في رعاية الموهوبات</h4>
+      <ul>
+        <li>التنسيق مع منسقة الموهوبات للاستفادة من حصص النشاط في تقديم برامج الرعاية المناسبة.</li>
+        <li>المشاركة في تنفيذ الأنشطة الإثرائية بما يتوافق مع احتياجات الطالبات الموهوبات.</li>
+      </ul>
+    </div>
+  `;
+}
+
+/* ===================== Backup ===================== */
+function exportBackup(){
+  const blob = new Blob([JSON.stringify({settings,data},null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'نسخة-احتياطية-منصة-الموهوبات-مدارس-صامطة.json';
+  a.click();
+}
+function importBackup(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const obj = JSON.parse(reader.result);
+      if(obj.settings) settings = Object.assign({}, defaultSettings, obj.settings);
+      if(obj.data) data = Object.assign({}, defaultData, obj.data);
+      saveSettings(); saveData(); renderAll();
+      alert('تمت الاستعادة بنجاح');
+    }catch(err){ alert('تعذّرت قراءة الملف'); }
+  };
+  reader.readAsText(file);
+}
+
+/* ===================== Tabs ===================== */
+const tabDefs = [
+  {id:'home', label:'🏠 الرئيسية'},
+  {id:'basic', label:'📋 البيانات الأساسية'},
+  {id:'roles', label:'🧭 الأدوار والمهام'},
+  {id:'committee', label:'👥 اللجنة'},
+  {id:'minutes', label:'📝 المحاضر'},
+  {id:'plan', label:'🗓️ الخطة الإجرائية'},
+  {id:'diff', label:'⚠️ الصعوبات'},
+  {id:'courses', label:'🎓 الدورات التدريبية'},
+  {id:'letters', label:'✉️ المراسلات'},
+  {id:'reports', label:'📑 تقارير الفعاليات'},
+  {id:'settings', label:'⚙️ الإعدادات'}
+];
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const btn = document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
+}
+function renderTabsNav(){
+  document.getElementById('tabsNav').innerHTML = tabDefs.map(t=>`<button class="tab-btn" id="btn-${t.id}" onclick="switchTab('${t.id}')">${t.label}</button>`).join('');
+}
+
+/* ===================== Print ===================== */
+function buildPrintMirrors(){
+  document.querySelectorAll('textarea').forEach(t=>{
+    const mirror = t.parentElement.querySelector('.print-mirror');
+    if(mirror){ mirror.textContent = t.value; }
+  });
+}
+window.addEventListener('beforeprint', buildPrintMirrors);
+function printNow(){ buildPrintMirrors(); window.print(); }
+
+/* ===================== E-signature ===================== */
+const sigTargets = {}; // uid -> {obj, key, refresh}
+let sigCurrentTab = 'draw';
+let sigDrawing = false;
+let sigHasInk = false;
+let sigCtx = null;
+
+function sigWidgetHTML(imgDataUrl, uid){
+  if(imgDataUrl){
+    return `<div class="sig-widget"><img src="${imgDataUrl}" class="sig-img"><button class="btn-sig-edit no-print" onclick="triggerSig('${uid}')">✏️ تعديل</button></div>`;
+  }
+  return `<div class="sig-widget"><button class="btn-sig no-print" onclick="triggerSig('${uid}')">✒️ توقيع</button><div class="sig-placeholder-line"></div></div>`;
+}
+function triggerSig(uid){
+  const target = sigTargets[uid];
+  if(!target) return;
+  openSigModal(target);
+}
+let sigActiveTarget = null;
+function openSigModal(target){
+  sigActiveTarget = target;
+  document.getElementById('sigModalBackdrop').classList.add('open');
+  switchSigTab('draw');
+  document.getElementById('sigTypeInput').value = target.obj.name || '';
+  initSigCanvas();
+}
+function closeSigModal(){
+  document.getElementById('sigModalBackdrop').classList.remove('open');
+  sigActiveTarget = null;
+}
+function switchSigTab(tab){
+  sigCurrentTab = tab;
+  document.getElementById('sigTabDrawBtn').classList.toggle('active', tab==='draw');
+  document.getElementById('sigTabTypeBtn').classList.toggle('active', tab==='type');
+  document.getElementById('sigPaneDraw').classList.toggle('active', tab==='draw');
+  document.getElementById('sigPaneType').classList.toggle('active', tab==='type');
+  if(tab==='type') renderTypedSigPreview();
+}
+function initSigCanvas(){
+  const canvas = document.getElementById('sigCanvas');
+  sigCtx = canvas.getContext('2d');
+  sigCtx.clearRect(0,0,canvas.width,canvas.height);
+  sigHasInk = false;
+  sigCtx.lineWidth = 2.6;
+  sigCtx.lineCap = 'round';
+  sigCtx.lineJoin = 'round';
+  sigCtx.strokeStyle = '#16324f';
+  canvas.onpointerdown = (e)=>{ sigDrawing = true; const p = sigPos(canvas,e); sigCtx.beginPath(); sigCtx.moveTo(p.x,p.y); };
+  canvas.onpointermove = (e)=>{ if(!sigDrawing) return; const p = sigPos(canvas,e); sigCtx.lineTo(p.x,p.y); sigCtx.stroke(); sigHasInk = true; };
+  canvas.onpointerup = ()=>{ sigDrawing = false; };
+  canvas.onpointerleave = ()=>{ sigDrawing = false; };
+}
+function sigPos(canvas, e){
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width/rect.width, scaleY = canvas.height/rect.height;
+  return { x:(e.clientX-rect.left)*scaleX, y:(e.clientY-rect.top)*scaleY };
+}
+function clearSigCanvas(){ const c=document.getElementById('sigCanvas'); sigCtx.clearRect(0,0,c.width,c.height); sigHasInk=false; }
+
+async function renderTypedSigPreview(){
+  const canvas = document.getElementById('sigTypePreview');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const name = document.getElementById('sigTypeInput').value.trim();
+  if(!name) return;
+  try{ await document.fonts.load("48px 'Aref Ruqaa'"); }catch(e){}
+  ctx.direction = 'rtl';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#16324f';
+  ctx.font = "700 46px 'Aref Ruqaa', cursive";
+  ctx.fillText(name, canvas.width/2, canvas.height/2);
+}
+function cropCanvasToInk(canvas){
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const imgData = ctx.getImageData(0,0,w,h).data;
+  let minX=w,minY=h,maxX=-1,maxY=-1;
+  for(let y=0;y<h;y++){
+    for(let x=0;x<w;x++){
+      const alpha = imgData[(y*w+x)*4+3];
+      if(alpha>10){
+        if(x<minX)minX=x; if(x>maxX)maxX=x;
+        if(y<minY)minY=y; if(y>maxY)maxY=y;
+      }
+    }
+  }
+  if(maxX<0) return null; // no ink
+  const pad=6;
+  minX=Math.max(0,minX-pad); minY=Math.max(0,minY-pad);
+  maxX=Math.min(w-1,maxX+pad); maxY=Math.min(h-1,maxY+pad);
+  const cw=maxX-minX+1, ch=maxY-minY+1;
+  const out=document.createElement('canvas'); out.width=cw; out.height=ch;
+  out.getContext('2d').drawImage(canvas,minX,minY,cw,ch,0,0,cw,ch);
+  return out.toDataURL('image/png');
+}
+function saveSignature(){
+  if(!sigActiveTarget) return;
+  let dataUrl = null;
+  if(sigCurrentTab==='draw'){
+    if(!sigHasInk){ alert('الرجاء رسم التوقيع أولاً'); return; }
+    dataUrl = cropCanvasToInk(document.getElementById('sigCanvas'));
+  }else{
+    const name = document.getElementById('sigTypeInput').value.trim();
+    if(!name){ alert('الرجاء كتابة الاسم أولاً'); return; }
+    sigActiveTarget.obj.name = name;
+    dataUrl = cropCanvasToInk(document.getElementById('sigTypePreview'));
+  }
+  if(!dataUrl){ alert('تعذّر حفظ التوقيع'); return; }
+  sigActiveTarget.obj[sigActiveTarget.key] = dataUrl;
+  saveData();
+  sigActiveTarget.refresh();
+  closeSigModal();
+}
+
+/* ===================== Init ===================== */
+function renderAll(){
+  document.getElementById('s_region').value = settings.region||'';
+  document.getElementById('s_office').value = settings.office||'';
+  document.getElementById('s_schoolName').value = settings.schoolName||'';
+  document.getElementById('s_year').value = settings.year||'';
+  document.getElementById('s_orient').value = settings.orient||'portrait';
+  renderCliche();
+  renderBasic();
+  renderRoles();
+  tables.committee.render();
+  renderMinutes();
+  tables.plan.render();
+  tables.diff.render();
+  tables.courses.render();
+  tables.lettersOut.render();
+  tables.lettersIn.render();
+  renderReports();
+}
+renderTabsNav();
+renderAll();
+switchTab('home');
+</script>
+</body>
+</html>
