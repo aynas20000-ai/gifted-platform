@@ -363,7 +363,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
     <div class="card">
       <h2>بيانات الطالبات الموهوبات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
       <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.students.add()">➕ إضافة طالبة</button><button class="btn btn-shared" onclick="openSharedSheet('الطالبات الموهوبات')">📊 فتح ورقة الطالبات المشتركة</button></div>
-      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th><th>نوع الموهبة</th><th>مصدر الترشيح</th><th>المشاركات</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-students"></tbody></table></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المرحلة/المدرسة</th><th>الصف</th><th>نوع الموهبة</th><th>مصدر الترشيح</th><th>المشاركات</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-students"></tbody></table></div>
     </div>
   </section>
 
@@ -504,7 +504,7 @@ const SETTINGS_KEY = 'giftedSchoolSamtaSettings_v1';
 
 const defaultSettings = { region:'جازان', office:'صامطة', schoolName:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة', year:'1448هـ', orient:'portrait', logo:null };
 const defaultData = {
-  school:{name:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة',stage:'ابتدائية ومتوسطة وتربية فكرية',classCount:'',studentCount:'',buildingType:'حكومي',phone:'',email:''},
+  school:{name:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة',stage:'',classCount:'',studentCount:'',buildingType:'حكومي',phone:'',email:''},
   principal:{name:'عائشة يحيى نايف حمدي',mobile:'',qualification:''},
   deputy:{name:'',mobile:'',qualification:''},
   coord:{name:'نبيهة مذكور / إيناس مدخلي',mobile:'',qualification:'',lessons:'',otherWork:'',serviceYears:'',giftedYears:'',email:''},
@@ -610,6 +610,10 @@ function makeTable(key, tbodyId, columns, seq){
           if(col.type==='textarea'){
             return `<td><textarea oninput="tables.${key}.set(${i},'${col.key}',this.value); autoGrow(this)" onload="autoGrow(this)">${row[col.key]||''}</textarea><div class="print-mirror"></div></td>`;
           }
+          if(col.type==='select'){
+            const opts=(col.options||[]).map(o=>`<option value="${o}" ${row[col.key]===o?'selected':''}>${o}</option>`).join('');
+            return `<td><select oninput="tables.${key}.set(${i},'${col.key}',this.value)"><option value="">اختاري</option>${opts}</select></td>`;
+          }
           return `<td><input type="${col.type||'text'}" value="${val}" oninput="tables.${key}.set(${i},'${col.key}',this.value)"></td>`;
         }).join('');
         return `<tr><td>${i+1}</td>${cells}<td class="no-print row-actions"><button class="btn-del" onclick="tables.${key}.del(${i})">✕</button></td></tr>`;
@@ -630,7 +634,7 @@ const tables = {
   courses: makeTable('courses','tbody-courses',[{key:'name'},{key:'duration'},{key:'provider'}]),
   lettersOut: makeTable('lettersOut','tbody-lettersOut',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'to'},{key:'notes',type:'textarea'}]),
   lettersIn: makeTable('lettersIn','tbody-lettersIn',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'from'},{key:'notes',type:'textarea'}]),
-  students: makeTable('students','tbody-students',[{key:'name'},{key:'grade'},{key:'talent'},{key:'source'},{key:'participations',type:'textarea'},{key:'notes',type:'textarea'}]),
+  students: makeTable('students','tbody-students',[{key:'name'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'grade'},{key:'talent'},{key:'source'},{key:'participations',type:'textarea'},{key:'notes',type:'textarea'}]),
   innovation: makeTable('innovation','tbody-innovation',[{key:'student'},{key:'competition'},{key:'project',type:'textarea'},{key:'supervisor'},{key:'stage'},{key:'result'}]),
   mawhiba: makeTable('mawhiba','tbody-mawhiba',[{key:'student'},{key:'grade'},{key:'nomination'},{key:'registration'},{key:'testDate',type:'date'},{key:'result'},{key:'notes',type:'textarea'}]),
   evidence: makeTable('evidence','tbody-evidence',[{key:'program'},{key:'type'},{key:'url'},{key:'date',type:'date'},{key:'notes',type:'textarea'}]),
@@ -760,12 +764,16 @@ function fieldHTML(obj, path, key, label, type){
       <option value="مستأجر" ${obj[key]==='مستأجر'?'selected':''}>مستأجر</option>
     </select></div>`;
   }
+  if(type==='schoolStage'){
+    const options=['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة'];
+    return `<div class="field"><label>${label}</label><select oninput="${path}.${key}=this.value; saveData();"><option value="">اختاري المرحلة/المدرسة</option>${options.map(o=>`<option value="${o}" ${obj[key]===o?'selected':''}>${o}</option>`).join('')}</select></div>`;
+  }
   return `<div class="field"><label>${label}</label><input type="${type||'text'}" value="${val}" oninput="${path}.${key}=this.value; saveData();"></div>`;
 }
 function renderBasic(){
   document.getElementById('grid-school').innerHTML = [
     fieldHTML(data.school,'data.school','name','اسم المدرسة'),
-    fieldHTML(data.school,'data.school','stage','المرحلة'),
+    fieldHTML(data.school,'data.school','stage','المرحلة/المدرسة','schoolStage'),
     fieldHTML(data.school,'data.school','classCount','عدد الفصول'),
     fieldHTML(data.school,'data.school','studentCount','عدد الطالبات/الطلاب'),
     fieldHTML(data.school,'data.school','buildingType','نوع المبنى','select'),
