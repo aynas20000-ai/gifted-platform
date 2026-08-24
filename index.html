@@ -172,6 +172,16 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 /* ===== التطويرات الجديدة ===== */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}.stat-card{background:linear-gradient(135deg,#fff,#faf4ff);border:1px solid #e7d8ed;border-radius:16px;padding:18px;text-align:center;box-shadow:0 4px 14px rgba(93,67,116,.06)}.stat-card .num{font-size:28px;font-weight:900;color:#5d4374}.stat-card .lbl{font-size:12px;color:#8b8291;margin-top:4px}.quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.quick-link{border:1px solid #eadfbf;border-radius:14px;padding:14px;background:#fffdf9}.quick-link b{display:block;color:#5d4374;margin-bottom:6px}.quick-link input{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:12px}.quick-link a{display:inline-block;margin-top:8px;color:#0f7a72;font-weight:700;font-size:12px;text-decoration:none}.status-chip{display:inline-block;padding:4px 8px;border-radius:999px;background:#f1e8f7;color:#5d4374;font-size:11px;font-weight:700}
 
+
+/* ===== School units + Home return ===== */
+.school-units-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:10px;}
+.school-unit-card{background:linear-gradient(135deg,#fffdf9,#faf5fc);border:1px solid #e7d9ec;border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(93,67,116,.06);}
+.school-unit-card h4{margin:0 0 12px;color:#5d4374;font-size:14px;border-bottom:1px solid #eadfbf;padding-bottom:8px;}
+.home-return-btn{position:fixed;left:18px;bottom:18px;z-index:120;display:none;align-items:center;gap:7px;background:linear-gradient(135deg,#5d4374,#7d5b97);color:#fff;border:none;border-radius:999px;padding:11px 16px;font-weight:800;font-size:12.5px;box-shadow:0 8px 22px rgba(93,67,116,.25);}
+.home-return-btn:hover{transform:translateY(-1px);}
+@media(max-width:520px){.home-return-btn{left:12px;bottom:12px;padding:10px 13px;font-size:12px;}}
+@media print{.home-return-btn{display:none !important;}}
+
 </style>
 </head>
 <body>
@@ -244,12 +254,17 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       </h2>
       <h3>بيانات المدرسة</h3>
       <div class="grid" id="grid-school"></div>
+      <h3>بيانات المراحل / المدارس</h3>
+      <div class="school-units-grid" id="school-units-grid"></div>
       <h3>بيانات مديرة المدرسة</h3>
       <div class="grid" id="grid-principal"></div>
       <h3>بيانات وكيلة المدرسة</h3>
       <div class="grid" id="grid-deputy"></div>
-      <h3>بيانات منسقة الموهوبات</h3>
-      <div class="grid" id="grid-coord"></div>
+      <h3>بيانات منسقتي الموهوبات</h3>
+      <h4 style="margin:14px 0 8px;color:var(--purple);font-size:18px">بيانات المنسقة: نبيهة مذكور</h4>
+      <div class="grid" id="grid-coord-nabiha"></div>
+      <h4 style="margin:20px 0 8px;color:var(--purple);font-size:18px">بيانات المنسقة: إيناس مدخلي</h4>
+      <div class="grid" id="grid-coord-inas"></div>
     </div>
   </section>
 
@@ -474,6 +489,8 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 </td></tr></tbody>
 </table>
 
+<button id="homeReturnBtn" class="home-return-btn no-print" onclick="switchTab('home')">🏠 العودة إلى الصفحة الرئيسية</button>
+
 <!-- ===== Signature Modal ===== -->
 <div class="sig-modal-backdrop no-print" id="sigModalBackdrop">
   <div class="sig-modal">
@@ -504,10 +521,17 @@ const SETTINGS_KEY = 'giftedSchoolSamtaSettings_v1';
 
 const defaultSettings = { region:'جازان', office:'صامطة', schoolName:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة', year:'1448هـ', orient:'portrait', logo:null };
 const defaultData = {
-  school:{name:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة',stage:'',classCount:'',studentCount:'',buildingType:'حكومي',phone:'',email:''},
+  school:{name:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة',buildingType:'حكومي',phone:'',email:''},
+  schoolUnits:{
+    primary:{label:'ابتدائي – خلفة وعلان',classCount:'',studentCount:''},
+    middleKhalfa:{label:'متوسط – خلفة وعلان',classCount:'',studentCount:''},
+    middleFourth:{label:'المتوسطة الرابعة',classCount:'',studentCount:''}
+  },
   principal:{name:'عائشة يحيى نايف حمدي',mobile:'',qualification:''},
   deputy:{name:'',mobile:'',qualification:''},
   coord:{name:'نبيهة مذكور / إيناس مدخلي',mobile:'',qualification:'',lessons:'',otherWork:'',serviceYears:'',giftedYears:'',email:''},
+  coordNabiha:{name:'نبيهة مذكور',mobile:'',qualification:'',lessons:'',otherWork:'',serviceYears:'',giftedYears:'',email:''},
+  coordInas:{name:'إيناس مدخلي',mobile:'',qualification:'',lessons:'',otherWork:'',serviceYears:'',giftedYears:'',email:''},
   committee:[
     {role:'رئيسة اللجنة',job:'مديرة المدرسة',name:'عائشة يحيى نايف حمدي'},
     {role:'نائبة الرئيس',job:'منسقتا الموهوبات',name:'نبيهة مذكور / إيناس مدخلي'},
@@ -518,12 +542,12 @@ const defaultData = {
   minutes:[],
   plan:[
     {item:'تدريس مهارات التفكير للصف الثالث الابتدائي', detail:'حصة أسبوعياً لكل فصل، مدرجة في جدول الحصص', date:'', exec:'', target:'', notes:''},
-    {item:'إنشاء قاعدة بيانات للطلاب/الطالبات المجتازين مقياس موهبة', detail:'', date:'', exec:'', target:'', notes:''},
+    {item:'إنشاء قاعدة بيانات للطالبات المجتازات مقياس موهبة', detail:'', date:'', exec:'', target:'', notes:''},
     {item:'التعريف بالموهوبات وآلية التعامل معهم', detail:'عبر الإذاعة الصباحية وورش العمل والنشرات والمسابقات', date:'', exec:'', target:'', notes:''},
     {item:'إعداد خطة سنوية لمنسقة الموهوبات', detail:'', date:'', exec:'', target:'', notes:''},
     {item:'التعريف بالأولمبياد الوطني للإبداع العلمي', detail:'تسجيل ومتابعة الطالبات، تنفيذ ورش عمل، ترشيح لحضور ورش الأولمبياد', date:'', exec:'', target:'', notes:''},
-    {item:'التعريف بالبرنامج الوطني لمقياس موهبة', detail:'إعلانات، إذاعة، ورش عمل، رسائل لأولياء الأمور، نشرات توعوية، ترشيح واختيار الطلاب المرشحين', date:'', exec:'', target:'', notes:''},
-    {item:'تفعيل أسبوع موهبة (3 مارس من كل عام)', detail:'لمدة أسبوع كامل بمشاركة الطلاب والمعلمين والإداريين وأولياء الأمور، ورفع تقرير إلكتروني بنهايته', date:'', exec:'', target:'', notes:''},
+    {item:'التعريف بالبرنامج الوطني لمقياس موهبة', detail:'إعلانات، إذاعة، ورش عمل، رسائل لأولياء الأمور، نشرات توعوية، ترشيح واختيار الطالبات المرشحات', date:'', exec:'', target:'', notes:''},
+    {item:'تفعيل أسبوع موهبة (3 مارس من كل عام)', detail:'لمدة أسبوع كامل بمشاركة الطالبات والمعلمات والإداريات وأولياء الأمور، ورفع تقرير إلكتروني بنهايته', date:'', exec:'', target:'', notes:''},
     {item:'التسريع للمراحل (إن وُجد)', detail:'بناءً على الأسماء المرسلة من مشرف/ة الموهوبات للمدرسة', date:'', exec:'', target:'', notes:''},
     {item:'رفع التقرير الختامي بالأعمال المنفذة', detail:'مع رفع الشواهد نهاية كل عام', date:'', exec:'', target:'', notes:''}
   ],
@@ -537,6 +561,11 @@ const defaultData = {
 
 let settings = load(SETTINGS_KEY, defaultSettings);
 let data = load(DATA_KEY, defaultData);
+// توافق مع النسخ السابقة: إنشاء سجلين مستقلين للمنسقتين عند فتح نسخة قديمة محفوظة
+if(!data.coordNabiha) data.coordNabiha = JSON.parse(JSON.stringify(defaultData.coordNabiha));
+if(!data.coordInas) data.coordInas = JSON.parse(JSON.stringify(defaultData.coordInas));
+if(!data.schoolUnits) data.schoolUnits = JSON.parse(JSON.stringify(defaultData.schoolUnits));
+['primary','middleKhalfa','middleFourth'].forEach(k=>{ if(!data.schoolUnits[k]) data.schoolUnits[k]=JSON.parse(JSON.stringify(defaultData.schoolUnits[k])); });
 
 function load(key, def){
   try{ const v = localStorage.getItem(key); return v ? Object.assign({}, def, JSON.parse(v)) : JSON.parse(JSON.stringify(def)); }
@@ -773,13 +802,14 @@ function fieldHTML(obj, path, key, label, type){
 function renderBasic(){
   document.getElementById('grid-school').innerHTML = [
     fieldHTML(data.school,'data.school','name','اسم المدرسة'),
-    fieldHTML(data.school,'data.school','stage','المرحلة/المدرسة','schoolStage'),
-    fieldHTML(data.school,'data.school','classCount','عدد الفصول'),
-    fieldHTML(data.school,'data.school','studentCount','عدد الطالبات/الطلاب'),
     fieldHTML(data.school,'data.school','buildingType','نوع المبنى','select'),
     fieldHTML(data.school,'data.school','phone','رقم هاتف المدرسة'),
     fieldHTML(data.school,'data.school','email','البريد الإلكتروني'),
   ].join('');
+  document.getElementById('school-units-grid').innerHTML = ['primary','middleKhalfa','middleFourth'].map(k=>{
+    const u=data.schoolUnits[k];
+    return `<div class="school-unit-card"><h4>${u.label}</h4><div class="grid">${fieldHTML(u,`data.schoolUnits.${k}`,'classCount','عدد الفصول')}${fieldHTML(u,`data.schoolUnits.${k}`,'studentCount','عدد الطالبات')}</div></div>`;
+  }).join('');
   document.getElementById('grid-principal').innerHTML = [
     fieldHTML(data.principal,'data.principal','name','اسم مديرة المدرسة'),
     fieldHTML(data.principal,'data.principal','mobile','رقم الجوال'),
@@ -790,15 +820,25 @@ function renderBasic(){
     fieldHTML(data.deputy,'data.deputy','mobile','رقم الجوال'),
     fieldHTML(data.deputy,'data.deputy','qualification','المؤهل / التخصص'),
   ].join('');
-  document.getElementById('grid-coord').innerHTML = [
-    fieldHTML(data.coord,'data.coord','name','اسم منسقة الموهوبات'),
-    fieldHTML(data.coord,'data.coord','mobile','رقم الجوال'),
-    fieldHTML(data.coord,'data.coord','qualification','المؤهل / التخصص'),
-    fieldHTML(data.coord,'data.coord','lessons','عدد الحصص'),
-    fieldHTML(data.coord,'data.coord','otherWork','أعمال أخرى مسندة'),
-    fieldHTML(data.coord,'data.coord','serviceYears','سنوات الخدمة في التعليم'),
-    fieldHTML(data.coord,'data.coord','giftedYears','سنوات العمل كمنسق/ة موهوبين'),
-    fieldHTML(data.coord,'data.coord','email','البريد الإلكتروني'),
+  document.getElementById('grid-coord-nabiha').innerHTML = [
+    fieldHTML(data.coordNabiha,'data.coordNabiha','name','اسم منسقة الموهوبات'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','mobile','رقم الجوال'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','qualification','المؤهل / التخصص'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','lessons','عدد الحصص'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','otherWork','أعمال أخرى مسندة'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','serviceYears','سنوات الخدمة في التعليم'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','giftedYears','سنوات العمل كمنسقة موهوبات'),
+    fieldHTML(data.coordNabiha,'data.coordNabiha','email','البريد الإلكتروني'),
+  ].join('');
+  document.getElementById('grid-coord-inas').innerHTML = [
+    fieldHTML(data.coordInas,'data.coordInas','name','اسم منسقة الموهوبات'),
+    fieldHTML(data.coordInas,'data.coordInas','mobile','رقم الجوال'),
+    fieldHTML(data.coordInas,'data.coordInas','qualification','المؤهل / التخصص'),
+    fieldHTML(data.coordInas,'data.coordInas','lessons','عدد الحصص'),
+    fieldHTML(data.coordInas,'data.coordInas','otherWork','أعمال أخرى مسندة'),
+    fieldHTML(data.coordInas,'data.coordInas','serviceYears','سنوات الخدمة في التعليم'),
+    fieldHTML(data.coordInas,'data.coordInas','giftedYears','سنوات العمل كمنسقة موهوبات'),
+    fieldHTML(data.coordInas,'data.coordInas','email','البريد الإلكتروني'),
   ].join('');
 }
 
@@ -808,8 +848,8 @@ function renderRoles(){
     <div class="ref-block">
       <h4>دور مديرة المدرسة في رعاية الموهوبات</h4>
       <ul>
-        <li>الإشراف على تنمية وعي منسوبي/منسوبات المدرسة بسمات الطالبات الموهوبات واحتياجاتهم التعليمية والنفسية.</li>
-        <li>تحفيز أعضاء/عضوات مجلس المدرسة على رعاية الموهوبات لتحقيق الأهداف المنشودة.</li>
+        <li>الإشراف على تنمية وعي منسوبات المدرسة بسمات الطالبات الموهوبات واحتياجاتهن التعليمية والنفسية.</li>
+        <li>تحفيز عضوات مجلس المدرسة على رعاية الموهوبات لتحقيق الأهداف المنشودة.</li>
         <li>الإشراف على خطة مجلس المدرسة في رعاية الموهوبات ومتابعة تنفيذها وتقويمها وتذليل معوقاتها.</li>
         <li>مساندة منسقة الموهوبات في تفعيل دوره/دورها.</li>
         <li>تشجيع المعلمات على تنويع طرق التدريس بما يخدم الموهوبات.</li>
@@ -820,7 +860,7 @@ function renderRoles(){
       <h4>مهام منسقة الموهوبات</h4>
       <ul>
         <li>تدريس مهارات التفكير للصف الثالث الابتدائي بواقع حصة أسبوعياً لكل فصل.</li>
-        <li>إنشاء قاعدة بيانات للطلاب/الطالبات المجتازين مقياس موهبة.</li>
+        <li>إنشاء قاعدة بيانات للطالبات المجتازات مقياس موهبة.</li>
         <li>التعريف بالموهوبات وآلية التعامل معهم عبر الإذاعة الصباحية وورش العمل والنشرات والمسابقات.</li>
         <li>الاطلاع على اللوائح والتعاميم المتعلقة برعاية الموهوبات ومتابعة تنفيذها.</li>
         <li>إعداد خطة سنوية وعرضها على مجلس المدرسة بعد اعتمادها من المشرف/ة التربوي/ة.</li>
@@ -837,7 +877,7 @@ function renderRoles(){
       <ul>
         <li>توعية المعلمات بخصائص الطالبات الموهوبات وأساليب الكشف عنهم.</li>
         <li>المساهمة مع منسقة الموهوبات في الكشف المبكر عن الموهوبات.</li>
-        <li>تقديم الرعاية النفسية والعلمية للطلاب/الطالبات المرشحين ولم يجتازوا مقاييس الكشف.</li>
+        <li>تقديم الرعاية النفسية والعلمية للطالبات المرشحات اللاتي لم يجتزن مقاييس الكشف.</li>
         <li>توعية أولياء الأمور بخصائص أبنائهم/بناتهم الموهوبات وكيفية التعامل معهم.</li>
         <li>تكريم الطالبات الموهوبات ودعم إبراز إنجازاتهم.</li>
       </ul>
@@ -919,6 +959,9 @@ function switchTab(id){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   const btn = document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
+  const homeBtn = document.getElementById('homeReturnBtn');
+  if(homeBtn) homeBtn.style.display = id==='home' ? 'none' : 'inline-flex';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 function renderTabsNav(){
   document.getElementById('tabsNav').innerHTML = tabDefs.map(t=>`<button class="tab-btn" id="btn-${t.id}" onclick="switchTab('${t.id}')">${t.label}</button>`).join('');
