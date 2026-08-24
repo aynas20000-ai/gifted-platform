@@ -74,6 +74,8 @@ table.data-table tr:nth-child(even){background:#fafbfd;}
 .btn{display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:9px; font-size:12.5px; font-weight:700;}
 .btn-add{background:var(--teal); color:#fff;}
 .btn-add:hover{background:#0c655e;}
+.btn-shared{background:#6b4a7d;color:#fff;}
+.btn-shared:hover{background:#573a68;}
 .btn-del{background:#fbeaea; color:#b23b3b; padding:5px 9px; border-radius:7px; font-size:12px;}
 .btn-del:hover{background:#f5d3d3;}
 .table-scroll{overflow-x:auto;}
@@ -300,7 +302,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <h2>الخطة الإجرائية / خطة التوعية
         <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
       </h2>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.plan.add()">➕ إضافة بند</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.plan.add()">➕ إضافة بند</button><button class="btn btn-shared" onclick="openSharedSheet('الخطة')">📊 فتح ورقة الخطة المشتركة</button></div>
       <div class="table-scroll"><table class="data-table"><colgroup><col style="width:4%"><col style="width:18%"><col style="width:20%"><col style="width:9%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>عنوان البند</th><th>ما تم إنجازه</th><th>تاريخ التنفيذ</th><th>الفئة المنفذة</th><th>الفئة المستهدفة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-plan"></tbody></table></div>
     </div>
   </section>
@@ -351,7 +353,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <h2>تقارير الفعاليات والبرامج المنفذة
         <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
       </h2>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="addReport()">➕ إضافة تقرير فعالية</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="addReport()">➕ إضافة تقرير فعالية</button><button class="btn btn-shared" onclick="openSharedSheet('التقارير')">📊 فتح ورقة التقارير المشتركة</button></div>
       <div id="reportsList"></div>
     </div>
   </section>
@@ -360,7 +362,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <section class="tab-panel" id="tab-students">
     <div class="card">
       <h2>بيانات الطالبات الموهوبات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.students.add()">➕ إضافة طالبة</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.students.add()">➕ إضافة طالبة</button><button class="btn btn-shared" onclick="openSharedSheet('الطالبات الموهوبات')">📊 فتح ورقة الطالبات المشتركة</button></div>
       <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th><th>نوع الموهبة</th><th>مصدر الترشيح</th><th>المشاركات</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-students"></tbody></table></div>
     </div>
   </section>
@@ -369,7 +371,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <section class="tab-panel" id="tab-innovation">
     <div class="card">
       <h2>إبداع والأولمبيادات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.innovation.add()">➕ إضافة مشاركة</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.innovation.add()">➕ إضافة مشاركة</button><button class="btn btn-shared" onclick="openSharedSheet('إبداع والأولمبيادات')">📊 فتح ورقة إبداع المشتركة</button></div>
       <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المسابقة / الأولمبياد</th><th>عنوان المشروع أو البحث</th><th>المشرفة</th><th>مرحلة المشاركة</th><th>النتيجة</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-innovation"></tbody></table></div>
     </div>
   </section>
@@ -378,7 +380,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <section class="tab-panel" id="tab-mawhiba">
     <div class="card">
       <h2>متابعة مقياس موهبة <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.mawhiba.add()">➕ إضافة طالبة</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.mawhiba.add()">➕ إضافة طالبة</button><button class="btn btn-shared" onclick="openSharedSheet('مقياس موهبة')">📊 فتح ورقة مقياس موهبة المشتركة</button></div>
       <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th><th>حالة الترشيح</th><th>حالة التسجيل</th><th>موعد الاختبار</th><th>النتيجة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-mawhiba"></tbody></table></div>
     </div>
   </section>
@@ -387,7 +389,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <section class="tab-panel" id="tab-evidence">
     <div class="card">
       <h2>الشواهد والملفات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.evidence.add()">➕ إضافة شاهد</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.evidence.add()">➕ إضافة شاهد</button><button class="btn btn-shared" onclick="openSharedSheet('الشواهد')">📊 فتح ورقة الشواهد المشتركة</button></div>
       <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم البرنامج / الفعالية</th><th>نوع الشاهد</th><th>رابط الشاهد</th><th>التاريخ</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-evidence"></tbody></table></div>
     </div>
   </section>
@@ -398,7 +400,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <h2>لوحة المتابعة</h2>
       <div class="stats-grid" id="statsGrid"></div>
       <h3>المهام والمتابعة</h3>
-      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.tasks.add()">➕ إضافة مهمة</button></div>
+      <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.tasks.add()">➕ إضافة مهمة</button><button class="btn btn-shared" onclick="openSharedSheet('المتابعة')">📊 فتح ورقة المتابعة المشتركة</button></div>
       <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>المهمة</th><th>المسؤولة</th><th>تاريخ الاستحقاق</th><th>الحالة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-tasks"></tbody></table></div>
     </div>
   </section>
@@ -899,6 +901,11 @@ const tabDefs = [
   {id:'links', label:'🔗 الروابط المهمة'},
   {id:'settings', label:'⚙️ الإعدادات'}
 ];
+function openSharedSheet(sheetName){
+  const url='https://docs.google.com/spreadsheets/d/1A09MWcmdWCVXwjnStbXAmNEvSxtYnpDsV-4jpEtK4zg/edit?usp=drivesdk';
+  window.open(url,'_blank');
+}
+
 function switchTab(id){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
