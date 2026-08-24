@@ -223,6 +223,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مرجع مختصر لمهام فريق رعاية الموهوبات</span></div>
       <div class="home-tile" onclick="switchTab('diff')"><div class="ico">💡</div><b>الصعوبات والتحسين</b><span>رصد التحديات والمقترحات التطويرية</span></div>
       <div class="home-tile" onclick="switchTab('students')"><div class="ico">👩🏻‍🎓</div><b>بيانات الطالبات الموهوبات</b><span>قاعدة بيانات موحدة للطالبات والترشيحات والمشاركات</span></div>
+      <div class="home-tile" onclick="window.open('https://docs.google.com/spreadsheets/d/1A09MWcmdWCVXwjnStbXAmNEvSxtYnpDsV-4jpEtK4zg/edit?usp=drivesdk','_blank')"><div class="ico">📊</div><b>إدارة البيانات المشتركة</b><span>فتح ملف Google Sheets المشترك بين منسقتي الموهوبات</span></div>
       <div class="home-tile" onclick="switchTab('innovation')"><div class="ico">🔬</div><b>إبداع والأولمبيادات</b><span>متابعة المشاريع والبحوث وحالة المشاركة</span></div>
       <div class="home-tile" onclick="switchTab('mawhiba')"><div class="ico">⭐</div><b>مقياس موهبة</b><span>الترشيح والتسجيل والاختبار والنتائج</span></div>
       <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>روابط الصور والملفات والشهادات لكل برنامج</span></div>
@@ -406,6 +407,11 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <section class="tab-panel" id="tab-links">
     <div class="card">
       <h2>الروابط المهمة</h2>
+      <div style="margin-bottom:16px;padding:16px;border:1px solid var(--border);border-radius:12px;background:#fbf8ff;text-align:center;">
+        <div style="font-weight:800;color:var(--navy);margin-bottom:8px;">📊 ملف البيانات المشتركة</div>
+        <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">الطالبات الموهوبات، إبداع والأولمبيادات، مقياس موهبة، الخطة، الشواهد، المتابعة والتقارير.</div>
+        <button class="btn btn-add no-print" onclick="window.open('https://docs.google.com/spreadsheets/d/1A09MWcmdWCVXwjnStbXAmNEvSxtYnpDsV-4jpEtK4zg/edit?usp=drivesdk','_blank')">فتح Google Sheets المشترك</button>
+      </div>
       <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.links.add()">➕ إضافة رابط</button></div>
       <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الرابط</th><th>الرابط</th><th>الوصف</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-links"></tbody></table></div>
     </div>
