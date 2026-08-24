@@ -167,6 +167,9 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 @media(max-width:650px){.home-hero{padding:26px 15px}.home-hero h2{font-size:21px}.home-people{grid-template-columns:1fr}.home-grid{grid-template-columns:1fr 1fr}.home-tile{padding:16px 10px}}
 @media(max-width:420px){.home-grid{grid-template-columns:1fr}}
 
+/* ===== التطويرات الجديدة ===== */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}.stat-card{background:linear-gradient(135deg,#fff,#faf4ff);border:1px solid #e7d8ed;border-radius:16px;padding:18px;text-align:center;box-shadow:0 4px 14px rgba(93,67,116,.06)}.stat-card .num{font-size:28px;font-weight:900;color:#5d4374}.stat-card .lbl{font-size:12px;color:#8b8291;margin-top:4px}.quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.quick-link{border:1px solid #eadfbf;border-radius:14px;padding:14px;background:#fffdf9}.quick-link b{display:block;color:#5d4374;margin-bottom:6px}.quick-link input{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:12px}.quick-link a{display:inline-block;margin-top:8px;color:#0f7a72;font-weight:700;font-size:12px;text-decoration:none}.status-chip{display:inline-block;padding:4px 8px;border-radius:999px;background:#f1e8f7;color:#5d4374;font-size:11px;font-weight:700}
+
 </style>
 </head>
 <body>
@@ -181,7 +184,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <div class="title-wrap">
     <div class="icon-box">🗂️</div>
     <div>
-      <h1>منصة رعاية الموهوبات بمدارسنا</h1>
+      <h1>منصة رعاية الموهوبات</h1>
       <div class="sub">المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة</div>
     </div>
   </div>
@@ -219,9 +222,15 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <div class="home-tile" onclick="switchTab('letters')"><div class="ico">✉️</div><b>المراسلات</b><span>فهرسة الخطابات الواردة والصادرة</span></div>
       <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مرجع مختصر لمهام فريق رعاية الموهوبات</span></div>
       <div class="home-tile" onclick="switchTab('diff')"><div class="ico">💡</div><b>الصعوبات والتحسين</b><span>رصد التحديات والمقترحات التطويرية</span></div>
+      <div class="home-tile" onclick="switchTab('students')"><div class="ico">👩🏻‍🎓</div><b>بيانات الطالبات الموهوبات</b><span>قاعدة بيانات موحدة للطالبات والترشيحات والمشاركات</span></div>
+      <div class="home-tile" onclick="switchTab('innovation')"><div class="ico">🔬</div><b>إبداع والأولمبيادات</b><span>متابعة المشاريع والبحوث وحالة المشاركة</span></div>
+      <div class="home-tile" onclick="switchTab('mawhiba')"><div class="ico">⭐</div><b>مقياس موهبة</b><span>الترشيح والتسجيل والاختبار والنتائج</span></div>
+      <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>روابط الصور والملفات والشهادات لكل برنامج</span></div>
+      <div class="home-tile" onclick="switchTab('dashboard')"><div class="ico">📌</div><b>لوحة المتابعة</b><span>متابعة المهام والمسؤولات وحالة التنفيذ</span></div>
+      <div class="home-tile" onclick="switchTab('links')"><div class="ico">🔗</div><b>الروابط المهمة</b><span>روابط البرامج والتسجيل والنماذج والتعاميم</span></div>
       <div class="home-tile" onclick="switchTab('settings')"><div class="ico">⚙️</div><b>الإعدادات والطباعة</b><span>الترويسة والشعار والنسخ الاحتياطي وإعدادات الطباعة</span></div>
     </div>
-    <div class="home-note">نحو بيئة مدرسية تُنمّي الموهبة وتصنع <strong>فرصًا أجمل وإنجازات أكبر</strong> ✨</div>
+    <div class="home-note">نحو بيئة مدرسية تُنمّي الموهبة وتفتح <strong>فرصًا أوسع للإبداع والتميّز</strong> ✨</div>
   </section>
 
   <!-- ===== بيانات أساسية ===== -->
@@ -346,6 +355,62 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
     </div>
   </section>
 
+  <!-- ===== بيانات الطالبات الموهوبات ===== -->
+  <section class="tab-panel" id="tab-students">
+    <div class="card">
+      <h2>بيانات الطالبات الموهوبات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.students.add()">➕ إضافة طالبة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th><th>نوع الموهبة</th><th>مصدر الترشيح</th><th>المشاركات</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-students"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== إبداع والأولمبيادات ===== -->
+  <section class="tab-panel" id="tab-innovation">
+    <div class="card">
+      <h2>إبداع والأولمبيادات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.innovation.add()">➕ إضافة مشاركة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المسابقة / الأولمبياد</th><th>عنوان المشروع أو البحث</th><th>المشرفة</th><th>مرحلة المشاركة</th><th>النتيجة</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-innovation"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== مقياس موهبة ===== -->
+  <section class="tab-panel" id="tab-mawhiba">
+    <div class="card">
+      <h2>متابعة مقياس موهبة <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.mawhiba.add()">➕ إضافة طالبة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th><th>حالة الترشيح</th><th>حالة التسجيل</th><th>موعد الاختبار</th><th>النتيجة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-mawhiba"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== الشواهد ===== -->
+  <section class="tab-panel" id="tab-evidence">
+    <div class="card">
+      <h2>الشواهد والملفات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.evidence.add()">➕ إضافة شاهد</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم البرنامج / الفعالية</th><th>نوع الشاهد</th><th>رابط الشاهد</th><th>التاريخ</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-evidence"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== لوحة المتابعة ===== -->
+  <section class="tab-panel" id="tab-dashboard">
+    <div class="card">
+      <h2>لوحة المتابعة</h2>
+      <div class="stats-grid" id="statsGrid"></div>
+      <h3>المهام والمتابعة</h3>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.tasks.add()">➕ إضافة مهمة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>المهمة</th><th>المسؤولة</th><th>تاريخ الاستحقاق</th><th>الحالة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-tasks"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== الروابط المهمة ===== -->
+  <section class="tab-panel" id="tab-links">
+    <div class="card">
+      <h2>الروابط المهمة</h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.links.add()">➕ إضافة رابط</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الرابط</th><th>الرابط</th><th>الوصف</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-links"></tbody></table></div>
+    </div>
+  </section>
+
   <!-- ===== الإعدادات ===== -->
   <section class="tab-panel no-print" id="tab-settings">
     <div class="card">
@@ -454,7 +519,12 @@ const defaultData = {
     {item:'التسريع للمراحل (إن وُجد)', detail:'بناءً على الأسماء المرسلة من مشرف/ة الموهوبات للمدرسة', date:'', exec:'', target:'', notes:''},
     {item:'رفع التقرير الختامي بالأعمال المنفذة', detail:'مع رفع الشواهد نهاية كل عام', date:'', exec:'', target:'', notes:''}
   ],
-  diff:[], courses:[], lettersOut:[], lettersIn:[], reports:[]
+  diff:[], courses:[], lettersOut:[], lettersIn:[], reports:[],
+  students:[], innovation:[], mawhiba:[], evidence:[], tasks:[],
+  links:[
+    {name:'بوابة موهبة',url:'https://www.mawhiba.org/',desc:'الموقع الرسمي لمؤسسة موهبة'},
+    {name:'الأولمبياد الوطني للموهبة – المسار البحثي إبداع',url:'https://www.mawhiba.sa/discover-mawhiba/competitions/national-gifted-olympiad/',desc:'التعريف والتسجيل في المسار البحثي إبداع'}
+  ]
 };
 
 let settings = load(SETTINGS_KEY, defaultSettings);
@@ -465,7 +535,7 @@ function load(key, def){
   catch(e){ return JSON.parse(JSON.stringify(def)); }
 }
 function saveSettings(){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); renderCliche(); }
-function saveData(){ localStorage.setItem(DATA_KEY, JSON.stringify(data)); }
+function saveData(){ localStorage.setItem(DATA_KEY, JSON.stringify(data)); renderStats(); }
 
 /* ===================== Cliché ===================== */
 const defaultLogoSVG = `<svg class="logo" viewBox="0 0 62 30" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16324f"/><stop offset="1" stop-color="#0f7a72"/></linearGradient></defs><g fill="url(#g1)">
@@ -551,7 +621,13 @@ const tables = {
   diff: makeTable('diff','tbody-diff',[{key:'difficulty',type:'textarea'},{key:'suggestion',type:'textarea'},{key:'notes',type:'textarea'}]),
   courses: makeTable('courses','tbody-courses',[{key:'name'},{key:'duration'},{key:'provider'}]),
   lettersOut: makeTable('lettersOut','tbody-lettersOut',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'to'},{key:'notes',type:'textarea'}]),
-  lettersIn: makeTable('lettersIn','tbody-lettersIn',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'from'},{key:'notes',type:'textarea'}])
+  lettersIn: makeTable('lettersIn','tbody-lettersIn',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'from'},{key:'notes',type:'textarea'}]),
+  students: makeTable('students','tbody-students',[{key:'name'},{key:'grade'},{key:'talent'},{key:'source'},{key:'participations',type:'textarea'},{key:'notes',type:'textarea'}]),
+  innovation: makeTable('innovation','tbody-innovation',[{key:'student'},{key:'competition'},{key:'project',type:'textarea'},{key:'supervisor'},{key:'stage'},{key:'result'}]),
+  mawhiba: makeTable('mawhiba','tbody-mawhiba',[{key:'student'},{key:'grade'},{key:'nomination'},{key:'registration'},{key:'testDate',type:'date'},{key:'result'},{key:'notes',type:'textarea'}]),
+  evidence: makeTable('evidence','tbody-evidence',[{key:'program'},{key:'type'},{key:'url'},{key:'date',type:'date'},{key:'notes',type:'textarea'}]),
+  tasks: makeTable('tasks','tbody-tasks',[{key:'task',type:'textarea'},{key:'owner'},{key:'due',type:'date'},{key:'status'},{key:'notes',type:'textarea'}]),
+  links: makeTable('links','tbody-links',[{key:'name'},{key:'url'},{key:'desc',type:'textarea'}])
 };
 
 /* fix plan columns order rendering (item/detail special handling) */
@@ -760,6 +836,20 @@ function renderRoles(){
   `;
 }
 
+/* ===================== Dashboard ===================== */
+function renderStats(){
+  const el=document.getElementById('statsGrid'); if(!el) return;
+  const completed=(data.tasks||[]).filter(t=>(t.status||'').includes('مكتمل')).length;
+  const cards=[
+    ['👩🏻‍🎓',(data.students||[]).length,'الطالبات الموهوبات'],
+    ['🔬',(data.innovation||[]).length,'مشاركات إبداع والأولمبيادات'],
+    ['⭐',(data.mawhiba||[]).length,'سجلات مقياس موهبة'],
+    ['📎',(data.evidence||[]).length,'الشواهد'],
+    ['✅',completed,'المهام المكتملة']
+  ];
+  el.innerHTML=cards.map(c=>`<div class="stat-card"><div style="font-size:22px">${c[0]}</div><div class="num">${c[1]}</div><div class="lbl">${c[2]}</div></div>`).join('');
+}
+
 /* ===================== Backup ===================== */
 function exportBackup(){
   const blob = new Blob([JSON.stringify({settings,data},null,2)], {type:'application/json'});
@@ -795,6 +885,12 @@ const tabDefs = [
   {id:'courses', label:'🎓 الدورات التدريبية'},
   {id:'letters', label:'✉️ المراسلات'},
   {id:'reports', label:'📑 تقارير الفعاليات'},
+  {id:'students', label:'👩🏻‍🎓 الطالبات الموهوبات'},
+  {id:'innovation', label:'🔬 إبداع والأولمبيادات'},
+  {id:'mawhiba', label:'⭐ مقياس موهبة'},
+  {id:'evidence', label:'📎 الشواهد'},
+  {id:'dashboard', label:'📌 لوحة المتابعة'},
+  {id:'links', label:'🔗 الروابط المهمة'},
   {id:'settings', label:'⚙️ الإعدادات'}
 ];
 function switchTab(id){
@@ -950,6 +1046,13 @@ function renderAll(){
   tables.lettersOut.render();
   tables.lettersIn.render();
   renderReports();
+  tables.students.render();
+  tables.innovation.render();
+  tables.mawhiba.render();
+  tables.evidence.render();
+  tables.tasks.render();
+  tables.links.render();
+  renderStats();
 }
 renderTabsNav();
 renderAll();
