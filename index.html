@@ -14,6 +14,7 @@
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 body{font-family:'Tajawal','Cairo',sans-serif; background:var(--bg); color:var(--text); direction:rtl; padding-bottom:60px;}
+html{scroll-behavior:auto!important;}
 h1,h2,h3,h4{font-family:'Cairo',sans-serif;}
 button{font-family:inherit; cursor:pointer; border:none;}
 input,textarea,select{font-family:inherit; direction:rtl;}
@@ -1306,7 +1307,7 @@ function switchTab(id){
   const btn = document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
   const homeBtn = document.getElementById('homeReturnBtn');
   if(homeBtn) homeBtn.style.display = id==='home' ? 'none' : 'inline-flex';
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.documentElement.scrollTop = 0; document.body.scrollTop = 0; window.scrollTo(0,0);
 }
 function renderTabsNav(){
   document.getElementById('tabsNav').innerHTML = tabDefs.map(t=>`<button class="tab-btn" id="btn-${t.id}" onclick="switchTab('${t.id}')">${t.label}</button>`).join('');
