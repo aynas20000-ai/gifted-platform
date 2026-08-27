@@ -232,6 +232,28 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 @media(max-width:760px){.home-grid,.record-grid{grid-template-columns:1fr 1fr}.shared-home-banner{align-items:flex-start;flex-direction:column}.shared-home-banner button{width:100%}.home-people{grid-template-columns:1fr 1fr}}
 @media(max-width:430px){.home-grid,.record-grid{grid-template-columns:1fr 1fr}.home-tile{min-height:122px;padding:14px 8px}.home-tile b{font-size:12.5px}.home-tile span{font-size:10px}.coordinator-grid{grid-template-columns:1fr 1fr}}
 
+
+/* ===== تحسين الواجهة الرئيسية: بحث + بطاقات أوضح ===== */
+.home-tools{display:flex;gap:10px;align-items:center;margin:16px 0 22px;flex-wrap:wrap}
+.home-search-wrap{flex:1;min-width:240px;position:relative}
+.home-search{width:100%;border:1px solid #e1d7e8;border-radius:16px;padding:13px 42px 13px 14px;background:#fff;color:#4f3b60;font-size:14px;font-weight:700;box-shadow:0 4px 14px rgba(93,67,116,.06);outline:none}
+.home-search:focus{border-color:#b99bc8;box-shadow:0 0 0 3px rgba(140,101,164,.10)}
+.home-search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px}
+.home-shared-status{border:none;border-radius:16px;padding:12px 15px;background:linear-gradient(135deg,#f2fffc,#fff8e9);color:#176b62;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(23,107,98,.08)}
+.home-no-results{display:none;text-align:center;padding:24px;background:#fff;border:1px dashed #d9cbe1;border-radius:18px;color:#806b8d;font-weight:800;margin:12px 0 22px}
+.dashboard-section{background:#fff;border:1px solid #eee6f2;border-radius:22px;padding:16px;margin:16px 0 20px;box-shadow:0 7px 24px rgba(93,67,116,.055)}
+.dashboard-section-title{font-size:16px;margin:0 0 14px;padding:0 2px}
+.home-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.home-tile{min-height:154px;border-radius:20px;padding:18px 13px;position:relative;overflow:hidden}
+.home-tile:after{content:"";position:absolute;inset:auto -30px -50px auto;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(199,167,214,.12),transparent 68%);pointer-events:none}
+.home-tile .ico{width:54px;height:54px;border-radius:17px;font-size:26px;margin-bottom:10px}
+.home-tile b{font-size:14.5px;line-height:1.45}
+.home-tile span{font-size:11.2px;line-height:1.6;max-width:95%}
+.tile-share-chip{margin-top:10px;display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#eef8f6;color:#176b62;font-size:9.8px;font-weight:900}
+.home-tile.is-hidden{display:none!important}.dashboard-section.is-hidden{display:none!important}
+@media(min-width:900px){.home-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.home-tile{min-height:150px}}
+@media(max-width:430px){.dashboard-section{padding:12px;border-radius:18px}.home-grid{grid-template-columns:1fr 1fr;gap:10px}.home-tile{min-height:142px;padding:15px 8px}.home-tile b{font-size:12.8px}.home-tile span{font-size:9.8px}.home-tools{gap:8px}.home-search-wrap{min-width:100%}.home-shared-status{width:100%}}
+
 </style>
 </head>
 <body>
@@ -281,48 +303,57 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <button onclick="openSharedSheet('البيانات المشتركة')">📊 فتح الملف المشترك</button>
     </div>
 
+    <div class="home-tools no-print">
+      <div class="home-search-wrap">
+        <span class="home-search-icon">🔎</span>
+        <input id="homeSectionSearch" class="home-search" type="search" placeholder="ابحثي عن قسم… مثل: مقياس موهبة، الشواهد، اللجنة" oninput="filterHomeSections(this.value)">
+      </div>
+      <button class="home-shared-status" onclick="switchTab('dashboard')">📌 متابعة الإنجاز</button>
+    </div>
+    <div id="homeNoResults" class="home-no-results">لا يوجد قسم مطابق للبحث.</div>
+
     <div class="dashboard-section">
       <div class="dashboard-section-title">📘 السجل والإدارة</div>
       <div class="home-grid">
-        <div class="home-tile" onclick="switchTab('record1448')"><div class="ico">📘</div><b>سجل 1448هـ</b><span>فهرس السجل ونماذجه</span></div>
-        <div class="home-tile" onclick="switchTab('basic')"><div class="ico">🏫</div><b>البيانات الأساسية</b><span>المدارس والمنسقتان والبيانات الإدارية</span></div>
-        <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مهام فريق رعاية الموهوبات</span></div>
-        <div class="home-tile" onclick="switchTab('committee')"><div class="ico">👥</div><b>اللجنة</b><span>أعضاء لجنة رعاية الموهوبات</span></div>
-        <div class="home-tile" onclick="switchTab('minutes')"><div class="ico">📝</div><b>المحاضر</b><span>الاجتماعات والقرارات والتوصيات</span></div>
-        <div class="home-tile" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>الخطة الإجرائية</b><span>البرامج والتنفيذ والمتابعة</span></div>
+        <div class="home-tile" onclick="switchTab('record1448')"><div class="ico">📘</div><b>سجل 1448هـ</b><span>فهرس السجل ونماذجه</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('basic')"><div class="ico">🏫</div><b>البيانات الأساسية</b><span>المدارس والمنسقتان والبيانات الإدارية</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مهام فريق رعاية الموهوبات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('committee')"><div class="ico">👥</div><b>اللجنة</b><span>أعضاء لجنة رعاية الموهوبات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('minutes')"><div class="ico">📝</div><b>المحاضر</b><span>الاجتماعات والقرارات والتوصيات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>الخطة الإجرائية</b><span>البرامج والتنفيذ والمتابعة</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
       </div>
     </div>
 
     <div class="dashboard-section">
       <div class="dashboard-section-title">👩🏻‍🎓 الطالبات والكشف والرعاية</div>
       <div class="home-grid">
-        <div class="home-tile" onclick="switchTab('students')"><div class="ico">👩🏻‍🎓</div><b>الطالبات الموهوبات</b><span>الحصر والبيانات والمشاركات</span></div>
-        <div class="home-tile" onclick="switchTab('traits')"><div class="ico">🧠</div><b>السمات والترشيح</b><span>بطاقة ملاحظة وترشيح</span></div>
-        <div class="home-tile" onclick="switchTab('mawhiba')"><div class="ico">⭐</div><b>مقياس موهبة</b><span>الترشيح والتسجيل والاختبار والنتيجة</span></div>
-        <div class="home-tile" onclick="switchTab('acceleration')"><div class="ico">🚀</div><b>نظام التسريع</b><span>المرشحات والمعايير والمتابعة</span></div>
-        <div class="home-tile" onclick="switchTab('specialTalents')"><div class="ico">🌟</div><b>المواهب الخاصة</b><span>المواهب النوعية وخطة الرعاية</span></div>
-        <div class="home-tile" onclick="switchTab('innovation')"><div class="ico">🔬</div><b>إبداع والأولمبيادات</b><span>المشروعات والمشاركات والمتابعة</span></div>
+        <div class="home-tile" onclick="switchTab('students')"><div class="ico">👩🏻‍🎓</div><b>الطالبات الموهوبات</b><span>الحصر والبيانات والمشاركات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('traits')"><div class="ico">🧠</div><b>السمات والترشيح</b><span>بطاقة ملاحظة وترشيح</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('mawhiba')"><div class="ico">⭐</div><b>مقياس موهبة</b><span>الترشيح والتسجيل والاختبار والنتيجة</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('acceleration')"><div class="ico">🚀</div><b>نظام التسريع</b><span>المرشحات والمعايير والمتابعة</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('specialTalents')"><div class="ico">🌟</div><b>المواهب الخاصة</b><span>المواهب النوعية وخطة الرعاية</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('innovation')"><div class="ico">🔬</div><b>إبداع والأولمبيادات</b><span>المشروعات والمشاركات والمتابعة</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
       </div>
     </div>
 
     <div class="dashboard-section">
       <div class="dashboard-section-title">📂 التنفيذ والتوثيق</div>
       <div class="home-grid">
-        <div class="home-tile" onclick="switchTab('courses')"><div class="ico">🎓</div><b>الدورات التدريبية</b><span>الدورات والجهات والساعات</span></div>
-        <div class="home-tile" onclick="switchTab('letters')"><div class="ico">✉️</div><b>المراسلات والتعاميم</b><span>الوارد والصادر والتعاميم</span></div>
-        <div class="home-tile" onclick="switchTab('reports')"><div class="ico">📑</div><b>تقارير الفعاليات</b><span>التنفيذ والنتائج والتوصيات</span></div>
-        <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>الصور والملفات والشهادات</span></div>
-        <div class="home-tile" onclick="switchTab('supervision')"><div class="ico">📋</div><b>الزيارات والمتابعة</b><span>توجيهات الوكيلة والمشرفة</span></div>
-        <div class="home-tile" onclick="switchTab('dashboard')"><div class="ico">📌</div><b>لوحة المتابعة</b><span>المهام وحالة الإنجاز</span></div>
+        <div class="home-tile" onclick="switchTab('courses')"><div class="ico">🎓</div><b>الدورات التدريبية</b><span>الدورات والجهات والساعات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('letters')"><div class="ico">✉️</div><b>المراسلات والتعاميم</b><span>الوارد والصادر والتعاميم</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('reports')"><div class="ico">📑</div><b>تقارير الفعاليات</b><span>التنفيذ والنتائج والتوصيات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>الصور والملفات والشهادات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('supervision')"><div class="ico">📋</div><b>الزيارات والمتابعة</b><span>توجيهات الوكيلة والمشرفة</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('dashboard')"><div class="ico">📌</div><b>لوحة المتابعة</b><span>المهام وحالة الإنجاز</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
       </div>
     </div>
 
     <div class="dashboard-section">
       <div class="dashboard-section-title">🛠️ أدوات مساندة</div>
       <div class="home-grid">
-        <div class="home-tile" onclick="switchTab('diff')"><div class="ico">⚠️</div><b>الصعوبات والتحسين</b><span>التحديات والمقترحات</span></div>
-        <div class="home-tile" onclick="switchTab('links')"><div class="ico">🔗</div><b>الروابط المهمة</b><span>موهبة والتسجيل والنماذج</span></div>
-        <div class="home-tile shared-tile" onclick="openSharedSheet('البيانات المشتركة')"><div class="ico">☁️</div><b>البيانات المشتركة</b><span>الملف المشترك بين إيناس ونبيهة</span></div>
+        <div class="home-tile" onclick="switchTab('diff')"><div class="ico">⚠️</div><b>الصعوبات والتحسين</b><span>التحديات والمقترحات</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile" onclick="switchTab('links')"><div class="ico">🔗</div><b>الروابط المهمة</b><span>موهبة والتسجيل والنماذج</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
+        <div class="home-tile shared-tile" onclick="openSharedSheet('البيانات المشتركة')"><div class="ico">☁️</div><b>البيانات المشتركة</b><span>الملف المشترك بين إيناس ونبيهة</span><div class="tile-share-chip">☁️ عمل مشترك</div></div>
         <div class="home-tile" onclick="switchTab('settings')"><div class="ico">⚙️</div><b>الإعدادات</b><span>الطباعة والنسخ الاحتياطي</span></div>
       </div>
     </div>
@@ -1248,6 +1279,24 @@ function ensurePageHomeButtons(){
       panel.appendChild(bottom);
     }
   });
+}
+
+
+function filterHomeSections(query){
+  const q=(query||'').trim().toLowerCase();
+  let visibleCount=0;
+  document.querySelectorAll('#tab-home .dashboard-section').forEach(section=>{
+    let sectionVisible=false;
+    section.querySelectorAll('.home-tile').forEach(tile=>{
+      const text=(tile.innerText||'').toLowerCase();
+      const show=!q || text.includes(q);
+      tile.classList.toggle('is-hidden',!show);
+      if(show){sectionVisible=true;visibleCount++;}
+    });
+    section.classList.toggle('is-hidden',!sectionVisible);
+  });
+  const no=document.getElementById('homeNoResults');
+  if(no) no.style.display=(q && visibleCount===0)?'block':'none';
 }
 
 function switchTab(id){
