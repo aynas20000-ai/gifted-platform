@@ -40,7 +40,7 @@ input,textarea,select{font-family:inherit; direction:rtl;}
 .pill:hover{background:rgba(255,255,255,.25);}
 
 /* ===== Tabs ===== */
-.tabs{display:flex; flex-wrap:wrap; gap:6px; padding:12px 18px; background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10;}
+.tabs{display:none!important;}
 .tab-btn{padding:8px 14px; border-radius:20px; background:#f0f3f7; color:var(--navy); font-size:12.5px; font-weight:700; white-space:nowrap;}
 .tab-btn.active{background:var(--navy); color:#fff;}
 .wrap{max-width:1180px; margin:0 auto; padding:18px;}
@@ -205,6 +205,26 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 .ref-mini ul{margin:0;padding-right:20px;line-height:1.9}
 @media(max-width:700px){.record-grid,.ref-cols{grid-template-columns:1fr}}
 
+
+/* ===== واجهة بطاقات مبسطة 1448 ===== */
+.dashboard-section{margin:18px 0 24px}
+.dashboard-section-title{display:flex;align-items:center;gap:9px;margin:0 0 12px;color:var(--navy);font-size:15px;font-weight:900}
+.dashboard-section-title:after{content:"";height:1px;background:#eadff0;flex:1}
+.home-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.home-tile{min-height:132px;padding:17px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.home-tile .ico{width:48px;height:48px;margin-bottom:9px}
+.home-tile b{font-size:13.5px;line-height:1.5}
+.home-tile span{font-size:10.8px;line-height:1.55}
+.home-tile.shared-tile{border:1.5px solid #a8d6cf;background:linear-gradient(135deg,#f2fffc,#fffdf8)}
+.shared-home-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(135deg,#f1fbf9,#fff9ef);border:1px solid #cce5df;border-radius:18px;padding:14px 16px;margin:16px 0 22px}
+.shared-home-banner b{display:block;color:#176b62;font-size:13px;margin-bottom:3px}.shared-home-banner span{font-size:11px;color:#6f777d;line-height:1.6}
+.shared-home-banner button{white-space:nowrap;background:#176b62;color:#fff;border-radius:12px;padding:9px 13px;font-weight:800}
+.coordinator-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 18px}.coordinator-card{background:#fff;border:1px solid #eadff0;border-radius:14px;padding:12px;text-align:center}.coordinator-card .role{font-size:10.5px;color:#9a8250;font-weight:700}.coordinator-card .name{font-size:13px;color:var(--navy);font-weight:900;margin-top:3px}
+.record-intro{display:none!important}
+.record-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:760px){.home-grid,.record-grid{grid-template-columns:1fr 1fr}.shared-home-banner{align-items:flex-start;flex-direction:column}.shared-home-banner button{width:100%}.home-people{grid-template-columns:1fr 1fr}}
+@media(max-width:430px){.home-grid,.record-grid{grid-template-columns:1fr 1fr}.home-tile{min-height:122px;padding:14px 8px}.home-tile b{font-size:12.5px}.home-tile span{font-size:10px}.coordinator-grid{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
@@ -239,39 +259,66 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
   <section class="tab-panel" id="tab-home">
     <div class="home-hero">
       <div class="home-badge">✨ منصة رعاية الموهوبات</div>
-      <h2>مرحبًا بكم في منصة الموهوبات المدرسية</h2>
-      <div class="school-name">المتوسطة الرابعة وابتدائية ومتوسطة خلفة وعلان بصامطة</div>
+      <h2>منصة الموهوبات المدرسية</h2>
+      <div class="school-name">ابتدائي خلفة وعلان • متوسط خلفة وعلان • المتوسطة الرابعة</div>
       <div class="year">العام الدراسي 1448هـ</div>
     </div>
-    <div class="home-people">
-      <div class="person-card"><div class="role">مديرة المدرسة</div><div class="name">عائشة يحيى نايف حمدي</div></div>
-      <div class="person-card"><div class="role">منسقتا الموهوبات</div><div class="name">نبيهة مذكور / إيناس مدخلي</div></div>
+
+    <div class="coordinator-grid">
+      <div class="coordinator-card"><div class="role">منسقة الموهوبات</div><div class="name">نبيهة مذكور</div></div>
+      <div class="coordinator-card"><div class="role">منسقة الموهوبات</div><div class="name">إيناس مدخلي</div></div>
     </div>
-    <div class="home-grid">
-      <div class="home-tile" onclick="switchTab('record1448')"><div class="ico">📘</div><b>سجل منسقة الموهوبات 1448هـ</b><span>الفهرس الجديد مدمج مع أقسام المنصة ونماذجها</span></div>
-      <div class="home-tile" onclick="switchTab('basic')"><div class="ico">🏫</div><b>بيانات المدرسة</b><span>البيانات الأساسية والإدارية للمدرسة والمنسقات</span></div>
-      <div class="home-tile" onclick="switchTab('committee')"><div class="ico">👥</div><b>لجنة رعاية الموهوبات</b><span>أعضاء اللجنة وأدوارهم وملفات العمل</span></div>
-      <div class="home-tile" onclick="switchTab('minutes')"><div class="ico">📝</div><b>المحاضر</b><span>اجتماعات اللجنة والقرارات والتوصيات والتوقيعات</span></div>
-      <div class="home-tile" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>الخطة الإجرائية</b><span>البرامج والأهداف والتنفيذ والمتابعة والشواهد</span></div>
-      <div class="home-tile" onclick="switchTab('reports')"><div class="ico">📊</div><b>تقارير البرامج</b><span>توثيق الفعاليات والبرامج والنتائج والمقترحات</span></div>
-      <div class="home-tile" onclick="switchTab('courses')"><div class="ico">🎓</div><b>الدورات التدريبية</b><span>تسجيل البرامج والدورات والجهات المنفذة</span></div>
-      <div class="home-tile" onclick="switchTab('letters')"><div class="ico">✉️</div><b>المراسلات</b><span>فهرسة الخطابات الواردة والصادرة</span></div>
-      <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مرجع مختصر لمهام فريق رعاية الموهوبات</span></div>
-      <div class="home-tile" onclick="switchTab('diff')"><div class="ico">💡</div><b>الصعوبات والتحسين</b><span>رصد التحديات والمقترحات التطويرية</span></div>
-      <div class="home-tile" onclick="switchTab('students')"><div class="ico">👩🏻‍🎓</div><b>بيانات الطالبات الموهوبات</b><span>قاعدة بيانات موحدة للطالبات والترشيحات والمشاركات</span></div>
-      <div class="home-tile" onclick="window.open('https://docs.google.com/spreadsheets/d/1A09MWcmdWCVXwjnStbXAmNEvSxtYnpDsV-4jpEtK4zg/edit?usp=drivesdk','_blank')"><div class="ico">📊</div><b>إدارة البيانات المشتركة</b><span>المصدر المشترك للبيانات بين إيناس ونبيهة — أي تعديل يظهر للطرفين</span></div>
-      <div class="home-tile" onclick="switchTab('innovation')"><div class="ico">🔬</div><b>إبداع والأولمبيادات</b><span>متابعة المشاريع والبحوث وحالة المشاركة</span></div>
-      <div class="home-tile" onclick="switchTab('mawhiba')"><div class="ico">⭐</div><b>مقياس موهبة</b><span>الترشيح والتسجيل والاختبار والنتائج</span></div>
-      <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>روابط الصور والملفات والشهادات لكل برنامج</span></div>
-      <div class="home-tile" onclick="switchTab('dashboard')"><div class="ico">📌</div><b>لوحة المتابعة</b><span>متابعة المهام والمسؤولات وحالة التنفيذ</span></div>
-      <div class="home-tile" onclick="switchTab('links')"><div class="ico">🔗</div><b>الروابط المهمة</b><span>روابط البرامج والتسجيل والنماذج والتعاميم</span></div>
-      <div class="home-tile" onclick="switchTab('traits')"><div class="ico">🧠</div><b>السمات والترشيح</b><span>حصر الطالبات المرشحات وفق السمات الملحوظة</span></div>
-      <div class="home-tile" onclick="switchTab('acceleration')"><div class="ico">🚀</div><b>نظام التسريع</b><span>متابعة المرشحات والمعايير والنتائج</span></div>
-      <div class="home-tile" onclick="switchTab('specialTalents')"><div class="ico">🌟</div><b>المواهب الخاصة</b><span>حصر المواهب النوعية والرعاية والإنجازات</span></div>
-      <div class="home-tile" onclick="switchTab('supervision')"><div class="ico">📋</div><b>الزيارات والمتابعة</b><span>متابعة الوكيلة وتوجيهات مشرفة الموهوبات</span></div>
-      <div class="home-tile" onclick="switchTab('settings')"><div class="ico">⚙️</div><b>الإعدادات والطباعة</b><span>الترويسة والشعار والنسخ الاحتياطي وإعدادات الطباعة</span></div>
+
+    <div class="shared-home-banner no-print">
+      <div><b>☁️ العمل المشترك بين المنسقتين</b><span>المنصة والرابط واحد لكما، والبيانات المشتركة تُحدَّث من ملف Google Sheets المشترك.</span></div>
+      <button onclick="openSharedSheet('البيانات المشتركة')">📊 فتح الملف المشترك</button>
     </div>
-    <div class="home-note">نحو بيئة مدرسية تُنمّي الموهبة وتفتح <strong>فرصًا أوسع للإبداع والتميّز</strong> ✨</div>
+
+    <div class="dashboard-section">
+      <div class="dashboard-section-title">📘 السجل والإدارة</div>
+      <div class="home-grid">
+        <div class="home-tile" onclick="switchTab('record1448')"><div class="ico">📘</div><b>سجل 1448هـ</b><span>فهرس السجل ونماذجه</span></div>
+        <div class="home-tile" onclick="switchTab('basic')"><div class="ico">🏫</div><b>البيانات الأساسية</b><span>المدارس والمنسقتان والبيانات الإدارية</span></div>
+        <div class="home-tile" onclick="switchTab('roles')"><div class="ico">🧭</div><b>الأدوار والمهام</b><span>مهام فريق رعاية الموهوبات</span></div>
+        <div class="home-tile" onclick="switchTab('committee')"><div class="ico">👥</div><b>اللجنة</b><span>أعضاء لجنة رعاية الموهوبات</span></div>
+        <div class="home-tile" onclick="switchTab('minutes')"><div class="ico">📝</div><b>المحاضر</b><span>الاجتماعات والقرارات والتوصيات</span></div>
+        <div class="home-tile" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>الخطة الإجرائية</b><span>البرامج والتنفيذ والمتابعة</span></div>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <div class="dashboard-section-title">👩🏻‍🎓 الطالبات والكشف والرعاية</div>
+      <div class="home-grid">
+        <div class="home-tile" onclick="switchTab('students')"><div class="ico">👩🏻‍🎓</div><b>الطالبات الموهوبات</b><span>الحصر والبيانات والمشاركات</span></div>
+        <div class="home-tile" onclick="switchTab('traits')"><div class="ico">🧠</div><b>السمات والترشيح</b><span>بطاقة ملاحظة وترشيح</span></div>
+        <div class="home-tile" onclick="switchTab('mawhiba')"><div class="ico">⭐</div><b>مقياس موهبة</b><span>الترشيح والتسجيل والاختبار والنتيجة</span></div>
+        <div class="home-tile" onclick="switchTab('acceleration')"><div class="ico">🚀</div><b>نظام التسريع</b><span>المرشحات والمعايير والمتابعة</span></div>
+        <div class="home-tile" onclick="switchTab('specialTalents')"><div class="ico">🌟</div><b>المواهب الخاصة</b><span>المواهب النوعية وخطة الرعاية</span></div>
+        <div class="home-tile" onclick="switchTab('innovation')"><div class="ico">🔬</div><b>إبداع والأولمبيادات</b><span>المشروعات والمشاركات والمتابعة</span></div>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <div class="dashboard-section-title">📂 التنفيذ والتوثيق</div>
+      <div class="home-grid">
+        <div class="home-tile" onclick="switchTab('courses')"><div class="ico">🎓</div><b>الدورات التدريبية</b><span>الدورات والجهات والساعات</span></div>
+        <div class="home-tile" onclick="switchTab('letters')"><div class="ico">✉️</div><b>المراسلات والتعاميم</b><span>الوارد والصادر والتعاميم</span></div>
+        <div class="home-tile" onclick="switchTab('reports')"><div class="ico">📑</div><b>تقارير الفعاليات</b><span>التنفيذ والنتائج والتوصيات</span></div>
+        <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>الصور والملفات والشهادات</span></div>
+        <div class="home-tile" onclick="switchTab('supervision')"><div class="ico">📋</div><b>الزيارات والمتابعة</b><span>توجيهات الوكيلة والمشرفة</span></div>
+        <div class="home-tile" onclick="switchTab('dashboard')"><div class="ico">📌</div><b>لوحة المتابعة</b><span>المهام وحالة الإنجاز</span></div>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <div class="dashboard-section-title">🛠️ أدوات مساندة</div>
+      <div class="home-grid">
+        <div class="home-tile" onclick="switchTab('diff')"><div class="ico">⚠️</div><b>الصعوبات والتحسين</b><span>التحديات والمقترحات</span></div>
+        <div class="home-tile" onclick="switchTab('links')"><div class="ico">🔗</div><b>الروابط المهمة</b><span>موهبة والتسجيل والنماذج</span></div>
+        <div class="home-tile shared-tile" onclick="openSharedSheet('البيانات المشتركة')"><div class="ico">☁️</div><b>البيانات المشتركة</b><span>الملف المشترك بين إيناس ونبيهة</span></div>
+        <div class="home-tile" onclick="switchTab('settings')"><div class="ico">⚙️</div><b>الإعدادات</b><span>الطباعة والنسخ الاحتياطي</span></div>
+      </div>
+    </div>
   </section>
 
   <!-- ===== سجل منسقة الموهوبات 1448هـ ===== -->
@@ -280,11 +327,6 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <h2>📘 سجل منسقة الموهوبات للعام 1448هـ
         <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
       </h2>
-      <div class="record-intro">
-        <h3>السجل الجديد أصبح خريطة عمل للمنصة</h3>
-        <div>تم دمج محتويات السجل الجديد مع المنصة بحيث لا نكرر النماذج الموجودة؛ كل بند يقود مباشرة إلى القسم الرقمي المناسب، مع إضافة الأقسام التي كانت ناقصة.</div>
-        <div style="margin-top:8px"><b>المدارس/المراحل المعتمدة:</b> ابتدائي خلفة وعلان — متوسط خلفة وعلان — المتوسطة الرابعة.</div>
-      </div>
       <div class="record-grid">
         <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">1</span><b>المقدمة</b><small>مرجع تمهيدي لرعاية الموهوبات.</small></div>
         <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">2</span><b>الأهداف العامة لرعاية الموهوبين والموهوبات</b><small>أهداف الكشف والرعاية والإثراء والتوجيه.</small></div>
@@ -1158,12 +1200,15 @@ const tabDefs = [
   {id:'settings', label:'⚙️ الإعدادات'}
 ];
 function sharedGuideHTML(label){
-  return `<div class="shared-guide no-print"><div class="shared-copy"><div class="shared-ico">☁️</div><div><b>بيانات مشتركة بين إيناس ونبيهة</b><span>لضمان ظهور التعديلات عندكما معًا، أدخلا بيانات ${label} من ملف Google Sheets المشترك.</span></div></div><button class="btn btn-shared" onclick="openSharedSheet('${label}')">📊 فتح البيانات المشتركة</button></div>`;
+  return `<div class="shared-guide no-print"><div class="shared-copy"><div class="shared-ico">☁️</div><div><b>بيانات مشتركة بين إيناس ونبيهة</b><span>بيانات ${label} المشتركة تُسجَّل في ملف Google Sheets حتى تظهر لكما معًا.</span></div></div><button class="btn btn-shared" onclick="openSharedSheet('${label}')">📊 فتح البيانات المشتركة</button></div>`;
 }
 function injectSharedGuides(){
   const map={
-    students:'الطالبات الموهوبات', innovation:'إبداع والأولمبيادات', mawhiba:'مقياس موهبة',
-    plan:'الخطة', evidence:'الشواهد', dashboard:'المتابعة', reports:'التقارير'
+    basic:'البيانات الأساسية', committee:'اللجنة', minutes:'المحاضر', plan:'الخطة الإجرائية',
+    diff:'الصعوبات والتحسين', courses:'الدورات التدريبية', letters:'المراسلات والتعاميم', reports:'تقارير الفعاليات',
+    students:'الطالبات الموهوبات', traits:'السمات والترشيح', innovation:'إبداع والأولمبيادات', mawhiba:'مقياس موهبة',
+    acceleration:'نظام التسريع', specialTalents:'المواهب الخاصة', supervision:'الزيارات والمتابعة',
+    evidence:'الشواهد', dashboard:'لوحة المتابعة'
   };
   Object.entries(map).forEach(([id,label])=>{
     const card=document.querySelector(`#tab-${id} .card`);
