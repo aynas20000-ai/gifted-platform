@@ -189,6 +189,22 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 @media(max-width:520px){.home-return-btn{left:12px;bottom:12px;padding:10px 13px;font-size:12px;}}
 @media print{.home-return-btn{display:none !important;}}
 
+
+/* ===== سجل منسقة الموهوبات 1448هـ ===== */
+.record-intro{background:linear-gradient(135deg,#f7fbff,#f5fff9);border:1px solid #cfe6df;border-radius:18px;padding:18px;margin-bottom:18px;line-height:1.9}
+.record-intro h3{margin:0 0 8px;color:#176b62}
+.record-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.record-item{border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;cursor:pointer;transition:.18s;box-shadow:0 3px 10px rgba(31,45,61,.04)}
+.record-item:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(31,45,61,.09);border-color:#b9dcd4}
+.record-item .n{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;background:#e8f6f2;color:#16766c;font-weight:800;margin-left:7px}
+.record-item b{color:var(--purple);font-size:14px}
+.record-item small{display:block;color:var(--muted);margin-top:6px;line-height:1.6}
+.ref-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+.ref-mini{background:#fbfcfe;border:1px solid var(--border);border-radius:14px;padding:14px}
+.ref-mini h4{margin:0 0 8px;color:#176b62}
+.ref-mini ul{margin:0;padding-right:20px;line-height:1.9}
+@media(max-width:700px){.record-grid,.ref-cols{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -204,7 +220,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
     <div class="icon-box">🗂️</div>
     <div>
       <h1>منصة رعاية الموهوبات</h1>
-      <div class="sub">المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة</div>
+      <div class="sub">المتوسطة الرابعة وابتدائية ومتوسطة خلفة وعلان بصامطة</div>
     </div>
   </div>
   <div class="pills">
@@ -224,7 +240,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
     <div class="home-hero">
       <div class="home-badge">✨ منصة رعاية الموهوبات</div>
       <h2>مرحبًا بكم في منصة الموهوبات المدرسية</h2>
-      <div class="school-name">المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة</div>
+      <div class="school-name">المتوسطة الرابعة وابتدائية ومتوسطة خلفة وعلان بصامطة</div>
       <div class="year">العام الدراسي 1448هـ</div>
     </div>
     <div class="home-people">
@@ -232,6 +248,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <div class="person-card"><div class="role">منسقتا الموهوبات</div><div class="name">نبيهة مذكور / إيناس مدخلي</div></div>
     </div>
     <div class="home-grid">
+      <div class="home-tile" onclick="switchTab('record1448')"><div class="ico">📘</div><b>سجل منسقة الموهوبات 1448هـ</b><span>الفهرس الجديد مدمج مع أقسام المنصة ونماذجها</span></div>
       <div class="home-tile" onclick="switchTab('basic')"><div class="ico">🏫</div><b>بيانات المدرسة</b><span>البيانات الأساسية والإدارية للمدرسة والمنسقات</span></div>
       <div class="home-tile" onclick="switchTab('committee')"><div class="ico">👥</div><b>لجنة رعاية الموهوبات</b><span>أعضاء اللجنة وأدوارهم وملفات العمل</span></div>
       <div class="home-tile" onclick="switchTab('minutes')"><div class="ico">📝</div><b>المحاضر</b><span>اجتماعات اللجنة والقرارات والتوصيات والتوقيعات</span></div>
@@ -248,9 +265,108 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       <div class="home-tile" onclick="switchTab('evidence')"><div class="ico">📎</div><b>الشواهد</b><span>روابط الصور والملفات والشهادات لكل برنامج</span></div>
       <div class="home-tile" onclick="switchTab('dashboard')"><div class="ico">📌</div><b>لوحة المتابعة</b><span>متابعة المهام والمسؤولات وحالة التنفيذ</span></div>
       <div class="home-tile" onclick="switchTab('links')"><div class="ico">🔗</div><b>الروابط المهمة</b><span>روابط البرامج والتسجيل والنماذج والتعاميم</span></div>
+      <div class="home-tile" onclick="switchTab('traits')"><div class="ico">🧠</div><b>السمات والترشيح</b><span>حصر الطالبات المرشحات وفق السمات الملحوظة</span></div>
+      <div class="home-tile" onclick="switchTab('acceleration')"><div class="ico">🚀</div><b>نظام التسريع</b><span>متابعة المرشحات والمعايير والنتائج</span></div>
+      <div class="home-tile" onclick="switchTab('specialTalents')"><div class="ico">🌟</div><b>المواهب الخاصة</b><span>حصر المواهب النوعية والرعاية والإنجازات</span></div>
+      <div class="home-tile" onclick="switchTab('supervision')"><div class="ico">📋</div><b>الزيارات والمتابعة</b><span>متابعة الوكيلة وتوجيهات مشرفة الموهوبات</span></div>
       <div class="home-tile" onclick="switchTab('settings')"><div class="ico">⚙️</div><b>الإعدادات والطباعة</b><span>الترويسة والشعار والنسخ الاحتياطي وإعدادات الطباعة</span></div>
     </div>
     <div class="home-note">نحو بيئة مدرسية تُنمّي الموهبة وتفتح <strong>فرصًا أوسع للإبداع والتميّز</strong> ✨</div>
+  </section>
+
+  <!-- ===== سجل منسقة الموهوبات 1448هـ ===== -->
+  <section class="tab-panel" id="tab-record1448">
+    <div class="card">
+      <h2>📘 سجل منسقة الموهوبات للعام 1448هـ
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="record-intro">
+        <h3>السجل الجديد أصبح خريطة عمل للمنصة</h3>
+        <div>تم دمج محتويات السجل الجديد مع المنصة بحيث لا نكرر النماذج الموجودة؛ كل بند يقود مباشرة إلى القسم الرقمي المناسب، مع إضافة الأقسام التي كانت ناقصة.</div>
+        <div style="margin-top:8px"><b>المدارس/المراحل المعتمدة:</b> ابتدائي خلفة وعلان — متوسط خلفة وعلان — المتوسطة الرابعة.</div>
+      </div>
+      <div class="record-grid">
+        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">1</span><b>المقدمة</b><small>مرجع تمهيدي لرعاية الموهوبات.</small></div>
+        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">2</span><b>الأهداف العامة لرعاية الموهوبين والموهوبات</b><small>أهداف الكشف والرعاية والإثراء والتوجيه.</small></div>
+        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">3</span><b>رعاية الموهوبات بالمدرسة</b><small>مرجع مختصر لدور المدرسة.</small></div>
+        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">4</span><b>أهداف الرعاية بالمدرسة</b><small>التوعية والكشف والرعاية والبيئة المحفزة.</small></div>
+        <div class="record-item" onclick="switchTab('roles')"><span class="n">5</span><b>مهام منسقة الموهوبات</b><small>مرجع الأدوار والمهام.</small></div>
+        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">6</span><b>المصطلحات الأساسية</b><small>الموهبة والإثراء والتسريع والرعاية.</small></div>
+        <div class="record-item" onclick="switchTab('students')"><span class="n">7</span><b>رعاية الموهوبات</b><small>قاعدة الطالبات والمتابعة الفردية.</small></div>
+        <div class="record-item" onclick="switchTab('traits')"><span class="n">8</span><b>السمات والخصائص</b><small>بطاقة ترشيح سريعة للطالبات.</small></div>
+        <div class="record-item" onclick="switchTab('basic')"><span class="n">9</span><b>بيانات منسقة الموهوبات</b><small>بيانات نبيهة وإيناس كلٌّ في بطاقة مستقلة.</small></div>
+        <div class="record-item" onclick="switchTab('courses')"><span class="n">10</span><b>الدورات التدريبية</b><small>اسم الدورة والجهة والتاريخ والساعات.</small></div>
+        <div class="record-item" onclick="switchTab('plan')"><span class="n">11</span><b>الخطة الإجرائية</b><small>التنفيذ والمتابعة والملاحظات.</small></div>
+        <div class="record-item" onclick="switchTab('mawhiba')"><span class="n">12</span><b>الخطة التنفيذية للتعرف على الموهوبين</b><small>الترشيح والتسجيل والاختبار والمتابعة.</small></div>
+        <div class="record-item" onclick="switchTab('mawhiba')"><span class="n">13</span><b>الطالبات المرشحات للمشروع الوطني</b><small>حصر المرشحات وحالة التسجيل والاختبار.</small></div>
+        <div class="record-item" onclick="switchTab('innovation')"><span class="n">14</span><b>الخطة التنفيذية لإبداع</b><small>التوعية والتسجيل والمشروع والتحكيم.</small></div>
+        <div class="record-item" onclick="switchTab('innovation')"><span class="n">15</span><b>المشاركات في إبداع</b><small>بيانات الطالبات والمشروعات والمشرفات.</small></div>
+        <div class="record-item" onclick="switchTab('acceleration')"><span class="n">16</span><b>المرشحات لنظام التسريع</b><small>الترشيح والمعايير والاختبارات.</small></div>
+        <div class="record-item" onclick="switchTab('specialTalents')"><span class="n">17</span><b>ذوات المواهب الخاصة</b><small>حصر المواهب النوعية وخطة الدعم.</small></div>
+        <div class="record-item" onclick="switchTab('minutes')"><span class="n">18</span><b>محاضر الاجتماعات</b><small>الاجتماعات والقرارات والتوصيات.</small></div>
+        <div class="record-item" onclick="switchTab('supervision')"><span class="n">19</span><b>متابعة وكيلة الشؤون التعليمية</b><small>التوجيهات والمتابعة الفصلية.</small></div>
+        <div class="record-item" onclick="switchTab('supervision')"><span class="n">20</span><b>توجيهات مشرفة الموهوبات</b><small>توثيق الزيارات والتوجيهات.</small></div>
+        <div class="record-item" onclick="switchTab('letters')"><span class="n">21</span><b>التعاميم</b><small>حفظ التعاميم والمراسلات والروابط.</small></div>
+      </div>
+    </div>
+    <div class="card" id="record-ref">
+      <h2>مرجع مختصر من السجل الجديد</h2>
+      <div class="ref-cols">
+        <div class="ref-mini"><h4>🎯 أهداف الرعاية</h4><ul><li>التعرف على الطالبات الموهوبات والكشف عنهن بالأساليب والمقاييس المناسبة.</li><li>تقديم رعاية علمية وتعليمية وإثرائية تتناسب مع قدراتهن واحتياجاتهن.</li><li>التعاون مع الأسرة والمعلمات وتوجيه الموهبة التوجيه السليم.</li><li>تشجيع الإبداع والبحث والابتكار وإبراز الإنجازات.</li><li>تعزيز الثقة بالنفس وتنمية التفكير الإبداعي.</li></ul></div>
+        <div class="ref-mini"><h4>🏫 رعاية الموهوبات في المدرسة</h4><ul><li>نشر الوعي بثقافة الموهبة.</li><li>التعرف على الطالبات المرشحات ومتابعتهن.</li><li>تنمية المواهب العلمية والإبداعية ومهارات التفكير.</li><li>توفير بيئة تربوية محفزة وخدمات نفسية واجتماعية مناسبة.</li></ul></div>
+        <div class="ref-mini"><h4>🧠 مصطلحات أساسية</h4><ul><li><b>الموهوبة:</b> طالبة لديها استعدادات أو قدرات أو أداء متميز يحتاج إلى رعاية مناسبة.</li><li><b>الإثراء:</b> خبرات تعليمية أعمق وأوسع من المحتوى المعتاد.</li><li><b>التسريع:</b> انتقال الطالبة المستوفية للشروط إلى صف أعلى وفق النظام المعتمد.</li><li><b>الرعاية:</b> خدمات وبرامج منظمة لتنمية القدرات والميول والإنجاز.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== السمات والترشيح ===== -->
+  <section class="tab-panel" id="tab-traits">
+    <div class="card">
+      <h2>🧠 السمات والخصائص — بطاقة ترشيح سريعة
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.traits.add()">➕ إضافة طالبة مرشحة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المرحلة/المدرسة</th><th>الصف</th><th>أبرز السمات الملحوظة</th><th>توصية الترشيح</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-traits"></tbody></table></div>
+      <div class="ref-block" style="margin-top:14px"><b>سمات إرشادية:</b> سرعة الفهم، قوة الملاحظة، كثرة الأسئلة ذات المعنى، الأفكار الجديدة، القدرة على حل المشكلات، المثابرة، الاستقلالية، القيادة، التعبير الواضح، الخيال الواسع، والربط بين الأسباب والنتائج.</div>
+    </div>
+  </section>
+
+  <!-- ===== التسريع ===== -->
+  <section class="tab-panel" id="tab-acceleration">
+    <div class="card">
+      <h2>🚀 الطالبات المرشحات لنظام التسريع
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.acceleration.add()">➕ إضافة طالبة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المرحلة/المدرسة</th><th>الصف</th><th>تحقق المعايير</th><th>اجتياز الاختبار التحصيلي</th><th>النتيجة/الحالة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-acceleration"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== المواهب الخاصة ===== -->
+  <section class="tab-panel" id="tab-specialTalents">
+    <div class="card">
+      <h2>🌟 الطالبات ذوات المواهب الخاصة
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.specialTalents.add()">➕ إضافة طالبة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المرحلة/المدرسة</th><th>الصف</th><th>الموهبة الخاصة</th><th>مجالها</th><th>الرعاية/الدعم المقدم</th><th>إنجازات أو شواهد</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-specialTalents"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ===== الزيارات والمتابعة ===== -->
+  <section class="tab-panel" id="tab-supervision">
+    <div class="card">
+      <h2>📋 متابعة وكيلة الشؤون التعليمية
+        <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
+      </h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.deputyFollow.add()">➕ إضافة متابعة</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>الفترة</th><th>التاريخ</th><th>التوجيهات</th><th>اسم الوكيلة</th><th>اسم المنسقة</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-deputyFollow"></tbody></table></div>
+    </div>
+    <div class="card">
+      <h2>📝 توجيهات مشرفة الموهوبات</h2>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.supervisorGuidance.add()">➕ إضافة زيارة/توجيه</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>رقم الزيارة</th><th>اليوم/التاريخ</th><th>التوجيهات</th><th>المشرفة الزائرة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-supervisorGuidance"></tbody></table></div>
+    </div>
   </section>
 
   <!-- ===== بيانات أساسية ===== -->
@@ -347,7 +463,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
         <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
       </h2>
       <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.courses.add()">➕ إضافة دورة</button></div>
-      <div class="table-scroll"><table class="data-table"><colgroup><col style="width:6%"><col style="width:50%"><col style="width:19%"><col style="width:19%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>مسمى الدورة</th><th>مدتها</th><th>جهتها</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-courses"></tbody></table></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>مسمى الدورة</th><th>الجهة المنفذة</th><th>التاريخ</th><th>عدد الساعات</th><th>نوع المشاركة</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-courses"></tbody></table></div>
     </div>
   </section>
 
@@ -366,6 +482,9 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
       </h2>
       <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.lettersIn.add()">➕ إضافة خطاب وارد</button></div>
       <div class="table-scroll"><table class="data-table"><colgroup><col style="width:5%"><col style="width:27%"><col style="width:12%"><col style="width:12%"><col style="width:20%"><col style="width:18%"><col style="width:6%"></colgroup><thead><tr><th>م</th><th>عنوان الخطاب</th><th>رقم الخطاب</th><th>تاريخ الخطاب</th><th>الجهة الوارد منها</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-lettersIn"></tbody></table></div>
+      <h3>التعاميم</h3>
+      <div class="toolbar no-print"><button class="btn btn-add" onclick="tables.circulars.add()">➕ إضافة تعميم</button></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>عنوان التعميم</th><th>رقم التعميم</th><th>التاريخ</th><th>الجهة</th><th>الرابط/المرفق</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-circulars"></tbody></table></div>
     </div>
   </section>
 
@@ -394,7 +513,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
     <div class="card">
       <h2>إبداع والأولمبيادات <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
       <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.innovation.add()">➕ إضافة مشاركة</button></div>
-      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المسابقة / الأولمبياد</th><th>عنوان المشروع أو البحث</th><th>المشرفة</th><th>مرحلة المشاركة</th><th>النتيجة</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-innovation"></tbody></table></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المرحلة/المدرسة</th><th>المسابقة / الأولمبياد</th><th>عنوان المشروع أو البحث</th><th>المشرفة</th><th>مرحلة المشاركة</th><th>النتيجة</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-innovation"></tbody></table></div>
     </div>
 
     <div class="card" style="margin-top:18px;">
@@ -472,7 +591,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
     <div class="card">
       <h2>متابعة مقياس موهبة <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span></h2>
       <div class="toolbar no-print" style="gap:8px;flex-wrap:wrap"><button class="btn btn-add" onclick="tables.mawhiba.add()">➕ إضافة طالبة</button></div>
-      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th><th>حالة الترشيح</th><th>حالة التسجيل</th><th>موعد الاختبار</th><th>النتيجة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-mawhiba"></tbody></table></div>
+      <div class="table-scroll"><table class="data-table"><thead><tr><th>م</th><th>اسم الطالبة</th><th>المرحلة/المدرسة</th><th>الصف</th><th>حالة الترشيح</th><th>جهة الترشيح</th><th>حالة التسجيل</th><th>موعد الاختبار</th><th>النتيجة</th><th>ملاحظات</th><th class="no-print">حذف</th></tr></thead><tbody id="tbody-mawhiba"></tbody></table></div>
     </div>
   </section>
 
@@ -559,7 +678,7 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 </div>
 
 <div class="credit-footer no-print">
-  منصة رعاية الموهوبات — المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة
+  منصة رعاية الموهوبات — المتوسطة الرابعة وابتدائية ومتوسطة خلفة وعلان بصامطة
 </div>
 
 </td></tr></tbody>
@@ -595,9 +714,9 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 const DATA_KEY = 'giftedSchoolSamtaData_v1';
 const SETTINGS_KEY = 'giftedSchoolSamtaSettings_v1';
 
-const defaultSettings = { region:'جازان', office:'صامطة', schoolName:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة', year:'1448هـ', orient:'portrait', logo:null };
+const defaultSettings = { region:'جازان', office:'صامطة', schoolName:'المتوسطة الرابعة وابتدائية ومتوسطة خلفة وعلان بصامطة', year:'1448هـ', orient:'portrait', logo:null };
 const defaultData = {
-  school:{name:'المتوسطة الرابعة ومتوسطة الفكرية ومتوسطة وابتدائية خلفة وعلان بصامطة',buildingType:'حكومي',phone:'',email:''},
+  school:{name:'المتوسطة الرابعة وابتدائية ومتوسطة خلفة وعلان بصامطة',buildingType:'حكومي',phone:'',email:''},
   schoolUnits:{
     primary:{label:'ابتدائي – خلفة وعلان',classCount:'',studentCount:''},
     middleKhalfa:{label:'متوسط – خلفة وعلان',classCount:'',studentCount:''},
@@ -627,10 +746,10 @@ const defaultData = {
     {item:'التسريع للمراحل (إن وُجد)', detail:'بناءً على الأسماء المرسلة من مشرف/ة الموهوبات للمدرسة', date:'', exec:'', target:'', notes:''},
     {item:'رفع التقرير الختامي بالأعمال المنفذة', detail:'مع رفع الشواهد نهاية كل عام', date:'', exec:'', target:'', notes:''}
   ],
-  diff:[], courses:[], lettersOut:[], lettersIn:[], reports:[],
-  students:[], innovation:[], mawhiba:[], evidence:[], tasks:[],
+  diff:[], courses:[], lettersOut:[], lettersIn:[], circulars:[], reports:[],
+  students:[], traits:[], innovation:[], mawhiba:[], acceleration:[], specialTalents:[], deputyFollow:[], supervisorGuidance:[], evidence:[], tasks:[],
   links:[
-    {name:'بوابة موهبة',url:'https://www.mawhiba.org/',desc:'الموقع الرسمي لمؤسسة موهبة'},
+    {name:'بوابة موهبة',url:'https://www.mawhiba.sa/',desc:'الموقع الرسمي لمؤسسة موهبة'},
     {name:'الأولمبياد الوطني للموهبة – المسار البحثي إبداع',url:'https://www.mawhiba.sa/discover-mawhiba/competitions/national-gifted-olympiad/',desc:'التعريف والتسجيل في المسار البحثي إبداع'}
   ]
 };
@@ -642,6 +761,8 @@ if(!data.coordNabiha) data.coordNabiha = JSON.parse(JSON.stringify(defaultData.c
 if(!data.coordInas) data.coordInas = JSON.parse(JSON.stringify(defaultData.coordInas));
 if(!data.schoolUnits) data.schoolUnits = JSON.parse(JSON.stringify(defaultData.schoolUnits));
 ['primary','middleKhalfa','middleFourth'].forEach(k=>{ if(!data.schoolUnits[k]) data.schoolUnits[k]=JSON.parse(JSON.stringify(defaultData.schoolUnits[k])); });
+['traits','acceleration','specialTalents','deputyFollow','supervisorGuidance','circulars'].forEach(k=>{ if(!Array.isArray(data[k])) data[k]=[]; });
+if(!Array.isArray(data.courses)) data.courses=[]; if(!Array.isArray(data.innovation)) data.innovation=[]; if(!Array.isArray(data.mawhiba)) data.mawhiba=[];
 
 function load(key, def){
   try{ const v = localStorage.getItem(key); return v ? Object.assign({}, def, JSON.parse(v)) : JSON.parse(JSON.stringify(def)); }
@@ -736,12 +857,18 @@ const tables = {
   committee: makeTable('committee','tbody-committee',[{key:'job',label:'الوظيفة'},{key:'role',label:'دورها'},{key:'name',label:'الاسم'}]),
   plan: makeTable('plan','tbody-plan',[{key:'item',label:'البند'},{key:'detail',type:'textarea'},{key:'date',type:'date'},{key:'exec',label:'المنفذة'},{key:'target',label:'المستهدفة'},{key:'notes',type:'textarea'}]),
   diff: makeTable('diff','tbody-diff',[{key:'difficulty',type:'textarea'},{key:'suggestion',type:'textarea'},{key:'notes',type:'textarea'}]),
-  courses: makeTable('courses','tbody-courses',[{key:'name'},{key:'duration'},{key:'provider'}]),
+  courses: makeTable('courses','tbody-courses',[{key:'name'},{key:'provider'},{key:'date',type:'date'},{key:'duration'},{key:'participation',type:'select',options:['مدربة','متدربة']}]),
   lettersOut: makeTable('lettersOut','tbody-lettersOut',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'to'},{key:'notes',type:'textarea'}]),
   lettersIn: makeTable('lettersIn','tbody-lettersIn',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'from'},{key:'notes',type:'textarea'}]),
   students: makeTable('students','tbody-students',[{key:'name'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'grade'},{key:'talent'},{key:'source'},{key:'participations',type:'textarea'},{key:'notes',type:'textarea'}]),
-  innovation: makeTable('innovation','tbody-innovation',[{key:'student'},{key:'competition'},{key:'project',type:'textarea'},{key:'supervisor'},{key:'stage'},{key:'result'}]),
-  mawhiba: makeTable('mawhiba','tbody-mawhiba',[{key:'student'},{key:'grade'},{key:'nomination'},{key:'registration'},{key:'testDate',type:'date'},{key:'result'},{key:'notes',type:'textarea'}]),
+  innovation: makeTable('innovation','tbody-innovation',[{key:'student'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'competition'},{key:'project',type:'textarea'},{key:'supervisor'},{key:'stage'},{key:'result'}]),
+  mawhiba: makeTable('mawhiba','tbody-mawhiba',[{key:'student'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'grade'},{key:'nomination'},{key:'nominationSource',type:'select',options:['مدعوم','ذاتي','أخرى']},{key:'registration'},{key:'testDate',type:'date'},{key:'result'},{key:'notes',type:'textarea'}]),
+  traits: makeTable('traits','tbody-traits',[{key:'name'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'grade'},{key:'traits',type:'textarea'},{key:'recommendation',type:'select',options:['ترشح لمقياس موهبة','تحتاج متابعة','رعاية موهبة خاصة','غير محدد']},{key:'notes',type:'textarea'}]),
+  acceleration: makeTable('acceleration','tbody-acceleration',[{key:'name'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'grade'},{key:'criteria',type:'select',options:['نعم','لا','قيد التحقق']},{key:'achievement',type:'select',options:['نعم','لا','لم يطبق']},{key:'status'},{key:'notes',type:'textarea'}]),
+  specialTalents: makeTable('specialTalents','tbody-specialTalents',[{key:'name'},{key:'schoolStage',type:'select',options:['ابتدائي – خلفة وعلان','متوسط – خلفة وعلان','المتوسطة الرابعة']},{key:'grade'},{key:'talent'},{key:'field'},{key:'support',type:'textarea'},{key:'evidence',type:'textarea'}]),
+  deputyFollow: makeTable('deputyFollow','tbody-deputyFollow',[{key:'term',type:'select',options:['الفصل الدراسي الأول','الفصل الدراسي الثاني','الفصل الدراسي الثالث']},{key:'date',type:'date'},{key:'guidance',type:'textarea'},{key:'deputy'},{key:'coordinator'}]),
+  supervisorGuidance: makeTable('supervisorGuidance','tbody-supervisorGuidance',[{key:'visit'},{key:'date',type:'date'},{key:'guidance',type:'textarea'},{key:'supervisor'},{key:'notes',type:'textarea'}]),
+  circulars: makeTable('circulars','tbody-circulars',[{key:'title'},{key:'num'},{key:'date',type:'date'},{key:'from'},{key:'url'},{key:'notes',type:'textarea'}]),
   evidence: makeTable('evidence','tbody-evidence',[{key:'program'},{key:'type'},{key:'url'},{key:'date',type:'date'},{key:'notes',type:'textarea'}]),
   tasks: makeTable('tasks','tbody-tasks',[{key:'task',type:'textarea'},{key:'owner'},{key:'due',type:'date'},{key:'status'},{key:'notes',type:'textarea'}]),
   links: makeTable('links','tbody-links',[{key:'name'},{key:'url'},{key:'desc',type:'textarea'}])
@@ -1008,6 +1135,7 @@ function importBackup(e){
 /* ===================== Tabs ===================== */
 const tabDefs = [
   {id:'home', label:'🏠 الرئيسية'},
+  {id:'record1448', label:'📘 سجل 1448هـ'},
   {id:'basic', label:'📋 البيانات الأساسية'},
   {id:'roles', label:'🧭 الأدوار والمهام'},
   {id:'committee', label:'👥 اللجنة'},
@@ -1015,11 +1143,15 @@ const tabDefs = [
   {id:'plan', label:'🗓️ الخطة الإجرائية'},
   {id:'diff', label:'⚠️ الصعوبات'},
   {id:'courses', label:'🎓 الدورات التدريبية'},
-  {id:'letters', label:'✉️ المراسلات'},
+  {id:'letters', label:'✉️ المراسلات والتعاميم'},
   {id:'reports', label:'📑 تقارير الفعاليات'},
   {id:'students', label:'👩🏻‍🎓 الطالبات الموهوبات'},
+  {id:'traits', label:'🧠 السمات والترشيح'},
   {id:'innovation', label:'🔬 إبداع والأولمبيادات'},
   {id:'mawhiba', label:'⭐ مقياس موهبة'},
+  {id:'acceleration', label:'🚀 التسريع'},
+  {id:'specialTalents', label:'🌟 المواهب الخاصة'},
+  {id:'supervision', label:'📋 الزيارات والمتابعة'},
   {id:'evidence', label:'📎 الشواهد'},
   {id:'dashboard', label:'📌 لوحة المتابعة'},
   {id:'links', label:'🔗 الروابط المهمة'},
@@ -1204,8 +1336,14 @@ function renderAll(){
   tables.lettersIn.render();
   renderReports();
   tables.students.render();
+  tables.traits.render();
   tables.innovation.render();
   tables.mawhiba.render();
+  tables.acceleration.render();
+  tables.specialTalents.render();
+  tables.deputyFollow.render();
+  tables.supervisorGuidance.render();
+  tables.circulars.render();
   tables.evidence.render();
   tables.tasks.render();
   tables.links.render();
