@@ -362,7 +362,7 @@ main{perspective:1800px;perspective-origin:center top}
 
     <div class="coordinator-grid">
       <div class="coordinator-card"><div class="role">منسقة الموهوبات</div><div class="name">نبيهة مذكور</div></div>
-      <div class="coordinator-card"><div class="role">منسقة الموهوبات</div><div class="name">إيناس مدخلي</div></div>
+      <div class="coordinator-card"><div class="role">مساعدة منسقة الموهوبات</div><div class="name">إيناس مدخلي</div></div>
     </div>
 
     <div class="shared-home-banner no-print">
@@ -530,10 +530,10 @@ main{perspective:1800px;perspective-origin:center top}
       <div class="grid" id="grid-principal"></div>
       <h3>بيانات وكيلة المدرسة</h3>
       <div class="grid" id="grid-deputy"></div>
-      <h3>بيانات منسقتي الموهوبات</h3>
+      <h3>بيانات منسقة الموهوبات ومساعدتها</h3>
       <h4 style="margin:14px 0 8px;color:var(--purple);font-size:18px">بيانات المنسقة: نبيهة مذكور</h4>
       <div class="grid" id="grid-coord-nabiha"></div>
-      <h4 style="margin:20px 0 8px;color:var(--purple);font-size:18px">بيانات المنسقة: إيناس مدخلي</h4>
+      <h4 style="margin:20px 0 8px;color:var(--purple);font-size:18px">بيانات مساعدة المنسقة: إيناس مدخلي</h4>
       <div class="grid" id="grid-coord-inas"></div>
     </div>
   </section>
@@ -876,7 +876,7 @@ const defaultData = {
   coordInas:{name:'إيناس مدخلي',mobile:'',qualification:'',lessons:'',otherWork:'',serviceYears:'',giftedYears:'',email:''},
   committee:[
     {role:'رئيسة اللجنة',job:'مديرة المدرسة',name:'عائشة يحيى نايف حمدي'},
-    {role:'نائبة الرئيس',job:'منسقتا الموهوبات',name:'نبيهة مذكور / إيناس مدخلي'},
+    {role:'نائبة الرئيس',job:'منسقة الموهوبات ومساعدتها',name:'نبيهة مذكور / إيناس مدخلي'},
     {role:'عضو/ة',job:'وكيل/ة الشؤون التعليمية',name:''},
     {role:'عضو/ة',job:'الموجه/المرشد الطلابي',name:''},
     {role:'عضو/ة',job:'رائدة النشاط',name:''}
@@ -1181,13 +1181,13 @@ function renderBasic(){
     fieldHTML(data.coordNabiha,'data.coordNabiha','email','البريد الإلكتروني'),
   ].join('');
   document.getElementById('grid-coord-inas').innerHTML = [
-    fieldHTML(data.coordInas,'data.coordInas','name','اسم منسقة الموهوبات'),
+    fieldHTML(data.coordInas,'data.coordInas','name','اسم مساعدة منسقة الموهوبات'),
     fieldHTML(data.coordInas,'data.coordInas','mobile','رقم الجوال'),
     fieldHTML(data.coordInas,'data.coordInas','qualification','المؤهل / التخصص'),
     fieldHTML(data.coordInas,'data.coordInas','lessons','عدد الحصص'),
     fieldHTML(data.coordInas,'data.coordInas','otherWork','أعمال أخرى مسندة'),
     fieldHTML(data.coordInas,'data.coordInas','serviceYears','سنوات الخدمة في التعليم'),
-    fieldHTML(data.coordInas,'data.coordInas','giftedYears','سنوات العمل كمنسقة موهوبات'),
+    fieldHTML(data.coordInas,'data.coordInas','giftedYears','سنوات العمل في مساعدة تنسيق الموهوبات'),
     fieldHTML(data.coordInas,'data.coordInas','email','البريد الإلكتروني'),
   ].join('');
 }
