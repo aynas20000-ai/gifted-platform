@@ -258,60 +258,64 @@ body[data-print-orient="landscape"] table.data-table td, body[data-print-orient=
 
 
 /* ===== Book-style page navigation ===== */
-:root{--book-paper:#fffdf8;--book-edge:#e7dcc8;--book-shadow:rgba(65,47,78,.18)}
-main{perspective:1800px;perspective-origin:center top}
+:root{--book-paper:#fffdf8;--book-edge:#e7dcc8;--book-shadow:rgba(65,47,78,.14)}
+.wrap{perspective:1600px;perspective-origin:center top}
 .tab-panel{
   position:relative;
   transform-style:preserve-3d;
   backface-visibility:hidden;
 }
 .tab-panel:not(#tab-home).active{
-  background:linear-gradient(90deg,#f4eee3 0,#fffdf8 2.8%,#fff 8%,#fffdf8 100%);
+  background:linear-gradient(90deg,#f6f0e7 0,#fffdf8 2.2%,#fff 7%,#fffdf8 100%);
   border:1px solid var(--book-edge);
   border-radius:8px 20px 20px 8px;
-  box-shadow:0 20px 45px var(--book-shadow), inset 12px 0 22px rgba(112,88,65,.055);
+  box-shadow:0 14px 32px var(--book-shadow), inset 10px 0 18px rgba(112,88,65,.045);
   padding:22px 20px 26px;
-  margin:12px auto 28px;
+  margin:10px auto 26px;
   max-width:1180px;
-  animation:bookPageOpen .44s cubic-bezier(.2,.72,.25,1) both;
+  animation:bookPageOpen .26s ease-out both;
   transform-origin:right center;
 }
 .tab-panel:not(#tab-home).active::before{
   content:"";
   position:absolute;
-  top:10px;bottom:10px;right:-5px;width:7px;
+  top:10px;bottom:10px;right:-4px;width:6px;
   border-radius:0 8px 8px 0;
   background:repeating-linear-gradient(to left,#efe5d6 0 1px,#fbf7ef 1px 2px);
-  box-shadow:3px 0 7px rgba(80,58,46,.08);
+  box-shadow:2px 0 5px rgba(80,58,46,.06);
   pointer-events:none;
 }
 .tab-panel:not(#tab-home).active::after{
   content:"";
   position:absolute;
-  left:12px;right:12px;bottom:-7px;height:8px;
+  left:12px;right:12px;bottom:-6px;height:7px;
   border-radius:0 0 12px 12px;
   background:linear-gradient(to bottom,#efe7da,#faf7f1);
   z-index:-1;
   pointer-events:none;
 }
-#tab-home.active{animation:bookCoverIn .30s ease-out both}
+#tab-home.active{animation:bookCoverIn .18s ease-out both}
 @keyframes bookPageOpen{
-  0%{opacity:.15;transform:rotateY(-18deg) translateX(-16px) scale(.992);filter:brightness(.96)}
-  60%{opacity:1;transform:rotateY(2.2deg) translateX(1px) scale(1)}
-  100%{opacity:1;transform:rotateY(0) translateX(0) scale(1);filter:none}
+  0%{opacity:.70;transform:rotateY(-5deg);}
+  100%{opacity:1;transform:rotateY(0deg);}
 }
 @keyframes bookCoverIn{
-  from{opacity:.35;transform:scale(.988)}
-  to{opacity:1;transform:scale(1)}
+  from{opacity:.75}
+  to{opacity:1}
+}
+.book-chapter-label{
+  display:inline-flex;align-items:center;gap:6px;
+  margin:0 0 12px;padding:7px 12px;border-radius:999px;
+  background:#f3ebf6;color:#5d4374;font-size:11.5px;font-weight:900
 }
 .page-home-btn{position:relative}
 .page-home-btn::before{content:"↩";margin-left:6px;font-size:15px}
 @media(max-width:700px){
-  main{perspective:1100px}
-  .tab-panel:not(#tab-home).active{padding:15px 12px 20px;margin:8px 4px 22px;border-radius:6px 15px 15px 6px}
+  .wrap{perspective:1000px}
+  .tab-panel:not(#tab-home).active{padding:15px 12px 20px;margin:7px 3px 20px;border-radius:6px 15px 15px 6px}
   @keyframes bookPageOpen{
-    0%{opacity:.25;transform:rotateY(-10deg) translateX(-8px)}
-    100%{opacity:1;transform:rotateY(0) translateX(0)}
+    0%{opacity:.78;transform:rotateY(-3deg)}
+    100%{opacity:1;transform:rotateY(0)}
   }
 }
 @media(prefers-reduced-motion:reduce){
@@ -321,6 +325,35 @@ main{perspective:1800px;perspective-origin:center top}
   .tab-panel:not(#tab-home).active{box-shadow:none!important;border:none!important;background:#fff!important;padding:0!important;margin:0!important;animation:none!important}
   .tab-panel:not(#tab-home).active::before,.tab-panel:not(#tab-home).active::after{display:none!important}
 }
+
+/* ===== تنقل الكتاب الثابت: رجوع + المكتبة + المنصة ===== */
+.book-nav-bar{
+  position:fixed;z-index:9999;left:50%;bottom:14px;transform:translateX(-50%);
+  display:none;direction:rtl;align-items:center;justify-content:center;gap:7px;
+  width:min(94vw,560px);padding:8px;
+  background:rgba(255,253,248,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid #e5d9e9;border-radius:20px;
+  box-shadow:0 12px 32px rgba(65,47,78,.22)
+}
+.book-nav-bar.show{display:flex}
+.book-nav-bar button{
+  flex:1;min-height:44px;border:0;border-radius:14px;padding:9px 8px;
+  font-family:inherit;font-weight:900;font-size:12.5px;cursor:pointer;
+  white-space:nowrap
+}
+.book-nav-back{background:#f3eef6;color:#5d4374}
+.book-nav-library{background:#fff6df;color:#80651f}
+.book-nav-home{background:linear-gradient(135deg,#5d4374,#7d5b97);color:#fff}
+.tab-panel.active{padding-bottom:86px!important}
+#tab-home.active{padding-bottom:10px!important}
+.home-return-btn{display:none!important}
+.record-library-back{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+.record-library-back button{border:0;border-radius:14px;padding:10px 15px;font-family:inherit;font-weight:900;cursor:pointer;background:#f4edf7;color:#5d4374}
+@media(max-width:430px){
+  .book-nav-bar{bottom:9px;width:96vw;gap:5px;padding:6px;border-radius:17px}
+  .book-nav-bar button{font-size:11.5px;min-height:43px;padding:8px 5px}
+}
+@media print{.book-nav-bar,.record-library-back{display:none!important}}
 </style>
 </head>
 <body>
@@ -433,12 +466,12 @@ main{perspective:1800px;perspective-origin:center top}
         <span class="sec-icons"><button onclick="printNow()">🖨️</button><button onclick="exportBackup()">💾</button></span>
       </h2>
       <div class="record-grid">
-        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">1</span><b>المقدمة</b><small>مرجع تمهيدي لرعاية الموهوبات.</small></div>
-        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">2</span><b>الأهداف العامة لرعاية الموهوبين والموهوبات</b><small>أهداف الكشف والرعاية والإثراء والتوجيه.</small></div>
-        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">3</span><b>رعاية الموهوبات بالمدرسة</b><small>مرجع مختصر لدور المدرسة.</small></div>
-        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">4</span><b>أهداف الرعاية بالمدرسة</b><small>التوعية والكشف والرعاية والبيئة المحفزة.</small></div>
+        <div class="record-item" onclick="switchTab('recordReference')"><span class="n">1</span><b>المقدمة</b><small>مرجع تمهيدي لرعاية الموهوبات.</small></div>
+        <div class="record-item" onclick="switchTab('recordReference')"><span class="n">2</span><b>الأهداف العامة لرعاية الموهوبين والموهوبات</b><small>أهداف الكشف والرعاية والإثراء والتوجيه.</small></div>
+        <div class="record-item" onclick="switchTab('recordReference')"><span class="n">3</span><b>رعاية الموهوبات بالمدرسة</b><small>مرجع مختصر لدور المدرسة.</small></div>
+        <div class="record-item" onclick="switchTab('recordReference')"><span class="n">4</span><b>أهداف الرعاية بالمدرسة</b><small>التوعية والكشف والرعاية والبيئة المحفزة.</small></div>
         <div class="record-item" onclick="switchTab('roles')"><span class="n">5</span><b>مهام منسقة الموهوبات</b><small>مرجع الأدوار والمهام.</small></div>
-        <div class="record-item" onclick="document.getElementById('record-ref').scrollIntoView({behavior:'smooth'})"><span class="n">6</span><b>المصطلحات الأساسية</b><small>الموهبة والإثراء والتسريع والرعاية.</small></div>
+        <div class="record-item" onclick="switchTab('recordReference')"><span class="n">6</span><b>المصطلحات الأساسية</b><small>الموهبة والإثراء والتسريع والرعاية.</small></div>
         <div class="record-item" onclick="switchTab('students')"><span class="n">7</span><b>رعاية الموهوبات</b><small>قاعدة الطالبات والمتابعة الفردية.</small></div>
         <div class="record-item" onclick="switchTab('traits')"><span class="n">8</span><b>السمات والخصائص</b><small>بطاقة ترشيح سريعة للطالبات.</small></div>
         <div class="record-item" onclick="switchTab('basic')"><span class="n">9</span><b>بيانات منسقة الموهوبات</b><small>بيانات نبيهة وإيناس كلٌّ في بطاقة مستقلة.</small></div>
@@ -456,12 +489,22 @@ main{perspective:1800px;perspective-origin:center top}
         <div class="record-item" onclick="switchTab('letters')"><span class="n">21</span><b>التعاميم</b><small>حفظ التعاميم والمراسلات والروابط.</small></div>
       </div>
     </div>
-    <div class="card" id="record-ref">
+
+  </section>
+
+  <!-- ===== صفحات المرجع المختصر للسجل ===== -->
+  <section class="tab-panel" id="tab-recordReference">
+    <div class="book-chapter-label">📖 صفحة من سجل 1448هـ</div>
+    <div class="card" id="record-reference-page">
       <h2>مرجع مختصر من السجل الجديد</h2>
       <div class="ref-cols">
         <div class="ref-mini"><h4>🎯 أهداف الرعاية</h4><ul><li>التعرف على الطالبات الموهوبات والكشف عنهن بالأساليب والمقاييس المناسبة.</li><li>تقديم رعاية علمية وتعليمية وإثرائية تتناسب مع قدراتهن واحتياجاتهن.</li><li>التعاون مع الأسرة والمعلمات وتوجيه الموهبة التوجيه السليم.</li><li>تشجيع الإبداع والبحث والابتكار وإبراز الإنجازات.</li><li>تعزيز الثقة بالنفس وتنمية التفكير الإبداعي.</li></ul></div>
         <div class="ref-mini"><h4>🏫 رعاية الموهوبات في المدرسة</h4><ul><li>نشر الوعي بثقافة الموهبة.</li><li>التعرف على الطالبات المرشحات ومتابعتهن.</li><li>تنمية المواهب العلمية والإبداعية ومهارات التفكير.</li><li>توفير بيئة تربوية محفزة وخدمات نفسية واجتماعية مناسبة.</li></ul></div>
         <div class="ref-mini"><h4>🧠 مصطلحات أساسية</h4><ul><li><b>الموهوبة:</b> طالبة لديها استعدادات أو قدرات أو أداء متميز يحتاج إلى رعاية مناسبة.</li><li><b>الإثراء:</b> خبرات تعليمية أعمق وأوسع من المحتوى المعتاد.</li><li><b>التسريع:</b> انتقال الطالبة المستوفية للشروط إلى صف أعلى وفق النظام المعتمد.</li><li><b>الرعاية:</b> خدمات وبرامج منظمة لتنمية القدرات والميول والإنجاز.</li></ul></div>
+      </div>
+      <div class="record-library-back no-print">
+        <button onclick="switchTab('record1448')">📚 العودة إلى مفاتيح السجل</button>
+        <button onclick="switchTab('home')">🏠 العودة إلى المنصة</button>
       </div>
     </div>
   </section>
@@ -1366,18 +1409,53 @@ function filterHomeSections(query){
   if(no) no.style.display=(q && visibleCount===0)?'block':'none';
 }
 
-function switchTab(id){
+let currentTabId = 'home';
+const tabHistory = [];
+
+function switchTab(id, fromHistory=false){
   const target=document.getElementById('tab-'+id);
-  document.querySelectorAll('.tab-panel').forEach(p=>{p.classList.remove('active');p.classList.remove('book-reopen');});
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  if(target){
-    void target.offsetWidth; // restart the page-turn animation each time
-    target.classList.add('active');
+  if(!target) return;
+
+  if(!fromHistory && currentTabId && currentTabId!==id){
+    tabHistory.push(currentTabId);
+    if(tabHistory.length>30) tabHistory.shift();
   }
-  const btn = document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
-  const homeBtn = document.getElementById('homeReturnBtn');
-  if(homeBtn) homeBtn.style.display = id==='home' ? 'none' : 'inline-flex';
-  document.documentElement.scrollTop = 0; document.body.scrollTop = 0; window.scrollTo(0,0);
+
+  /* الانتقال فوري لأعلى الصفحة: لا تمرير ولا نزلة طويلة */
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
+  window.scrollTo(0,0);
+
+  document.querySelectorAll('.tab-panel').forEach(p=>{
+    p.classList.remove('active');
+    p.classList.remove('book-reopen');
+  });
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+
+  target.classList.add('active');
+  currentTabId=id;
+
+  const btn=document.getElementById('btn-'+id);
+  if(btn) btn.classList.add('active');
+
+  const homeBtn=document.getElementById('homeReturnBtn');
+  if(homeBtn) homeBtn.style.display='none';
+
+  const bookNav=document.getElementById('bookNavBar');
+  if(bookNav) bookNav.classList.toggle('show', id!=='home');
+
+  /* تأكيد أن الصفحة تبدأ من أعلاها بعد الرسم */
+  requestAnimationFrame(()=>window.scrollTo(0,0));
+}
+
+function goBackTab(){
+  let prev=null;
+  while(tabHistory.length && !prev){
+    const candidate=tabHistory.pop();
+    if(candidate && candidate!==currentTabId && document.getElementById('tab-'+candidate)) prev=candidate;
+  }
+  switchTab(prev || (currentTabId==='record1448' ? 'home' : 'record1448'), true);
 }
 function renderTabsNav(){
   document.getElementById('tabsNav').innerHTML = tabDefs.map(t=>`<button class="tab-btn" id="btn-${t.id}" onclick="switchTab('${t.id}')">${t.label}</button>`).join('');
@@ -1546,6 +1624,13 @@ renderAll();
 switchTab('home');
 
 ensurePageHomeButtons();
+const _initialBookNav=document.getElementById('bookNavBar'); if(_initialBookNav) _initialBookNav.classList.remove('show');
 </script>
+
+<div id="bookNavBar" class="book-nav-bar no-print" aria-label="تنقل صفحات المنصة">
+  <button class="book-nav-back" onclick="goBackTab()">↩️ الصفحة السابقة</button>
+  <button class="book-nav-library" onclick="switchTab('record1448')">📚 فهرس السجل</button>
+  <button class="book-nav-home" onclick="switchTab('home')">🏠 المنصة</button>
+</div>
 </body>
 </html>
